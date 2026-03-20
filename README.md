@@ -13,7 +13,6 @@
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![spaCy](https://img.shields.io/badge/spaCy-3.7-09A3D5?style=flat-square)](https://spacy.io/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Claude AI](https://img.shields.io/badge/Claude-claude--opus--4--6-orange?style=flat-square)](https://www.anthropic.com/)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)](LICENSE)
 
 <br />
