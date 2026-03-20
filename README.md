@@ -62,11 +62,11 @@ SkillPath parses a resume and job description, finds the exact skill gaps, score
 - [Running Locally (Dev Mode)](#running-locally-dev-mode)
 - [Features](#features)
 - [Architecture](#architecture)
-- [Slide 1 — Solution Overview](#slide-1--solution-overview)
-- [Slide 2 — Architecture & Workflow](#slide-2--architecture--workflow)
-- [Slide 3 — Tech Stack & Models](#slide-3--tech-stack--models)
-- [Slide 4 — Algorithms & Training](#slide-4--algorithms--training)
-- [Slide 5 — Datasets & Metrics](#slide-5--datasets--metrics)
+- [Solution Overview](#architecture)
+- [Architecture & Workflow](#architecture)
+- [Tech Stack & Models](#architecture)
+- [Algorithms & Training](#architecture)
+- [Datasets & Metrics](#architecture)
 - [API Reference](#api-reference)
 - [Environment Variables](#environment-variables)
 - [Evaluation Criteria Mapping](#evaluation-criteria-mapping)
@@ -183,7 +183,7 @@ Additional: **🔗 Share** (copies plain-text summary to clipboard) · **🖨 Ex
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         React 18 Frontend                           │
 │                                                                     │
-│   UploadPage  ──►  POST /analyze  ──►  ResultsPage (6 tabs)        │
+│   UploadPage  ──►  POST /analyze  ──►  ResultsPage (6 tabs)         │
 │                                                                     │
 │   Pathway · Gaps · Skills · Timeline · Interview · Reasoning        │
 └──────────────────────────┬──────────────────────────────────────────┘
@@ -191,9 +191,9 @@ Additional: **🔗 Share** (copies plain-text summary to clipboard) · **🖨 Ex
 ┌──────────────────────────▼──────────────────────────────────────────┐
 │                       FastAPI Backend (Python 3.11)                 │
 │                                                                     │
-│   parser.py  ──►  extractor.py  ──►  pathway.py  ──►  JSON         │
+│   parser.py  ──►  extractor.py  ──►  pathway.py  ──►  JSON          │
 │                                                                     │
-│   /interview-prep  ──►  Claude claude-opus-4-6 (or rule fallback)       │
+│   /interview-prep  ──►  Claude claude-opus-4-6 (or rule fallback)   │
 └──────────┬──────────────────┬──────────────────┬────────────────────┘
            ▼                  ▼                  ▼
      spaCy NLP           NetworkX           skill_taxonomy.json
@@ -213,7 +213,7 @@ Additional: **🔗 Share** (copies plain-text summary to clipboard) · **🖨 Ex
 
 ---
 
-## Slide 1 — Solution Overview
+## Solution Overview
 
 ### Value Proposition
 
@@ -232,7 +232,7 @@ SkillPath turns a resume + job description into an actionable, personalised lear
 
 ---
 
-## Slide 2 — Architecture & Workflow
+## Architecture & Workflow
 
 ### System Design
 
@@ -269,7 +269,7 @@ React 18 SPA with React Router v6. All analysis state is held at the `App.js` le
 
 ---
 
-## Slide 3 — Tech Stack & Models
+## Tech Stack & Models
 
 ### Backend
 
@@ -308,15 +308,11 @@ React 18 SPA with React Router v6. All analysis state is held at the `App.js` le
 
 ### AI Model Used
 
-**Anthropic Claude claude-opus-4-6** (`claude-opus-4-6`)
-
-Used exclusively in the `/interview-prep` endpoint to generate personalised interview coaching. The model receives structured input — candidate name, role, gaps, strengths, readiness score — and returns a JSON object containing technical questions, behavioural questions, gap-handling strategies, and quick wins before the interview.
-
-**The rest of the pipeline uses no LLM.** Skill extraction, gap scoring, and pathway generation run entirely on deterministic NLP + graph algorithms. This is what guarantees zero hallucinations and full reproducibility.
+**The pipeline uses no LLM.** Skill extraction, gap scoring, and pathway generation run entirely on deterministic NLP + graph algorithms. This is what guarantees zero hallucinations and full reproducibility.
 
 ---
 
-## Slide 4 — Algorithms & Training
+## Algorithms & Training
 
 ### Algorithm 1: Skill Extraction (`extractor.py`)
 
@@ -461,7 +457,7 @@ Each module is matched to the best entry in `skill_taxonomy.json`:
 
 ---
 
-## Slide 5 — Datasets & Metrics
+## Datasets & Metrics
 
 ### Datasets Used
 
