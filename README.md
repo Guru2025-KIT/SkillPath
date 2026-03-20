@@ -48,10 +48,10 @@ SkillPath solves this by generating a unique learning pathway for every individu
 
 SkillPath parses a resume and job description, finds the exact skill gaps, scores each one with a transparent formula, and generates a phased, dependency-aware learning pathway — all in under 3 seconds.
 
-- ✅ **No black box** — every decision comes with a plain-English reasoning trace
-- ✅ **No hallucinations** — all course links are real, verified resources
-- ✅ **No generic content** — every pathway is built from the actual resume vs. the actual JD
-- ✅ **One command to run** — fully Dockerised
+-   **No black box** — every decision comes with a plain-English reasoning trace
+-   **No hallucinations** — all course links are real, verified resources
+-   **No generic content** — every pathway is built from the actual resume vs. the actual JD
+-   **One command to run** — fully Dockerised
 
 ---
 
