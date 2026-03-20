@@ -1,0 +1,2756 @@
+{
+  "skills": {
+    "python": {
+      "aliases": [
+        "python3",
+        "py",
+        "python programming"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "javascript": {
+      "aliases": [
+        "js",
+        "es6",
+        "es2015",
+        "ecmascript",
+        "node.js",
+        "nodejs"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "typescript": {
+      "aliases": [
+        "ts"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "java": {
+      "aliases": [
+        "java programming",
+        "core java",
+        "java se",
+        "java ee"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "c++": {
+      "aliases": [
+        "cpp",
+        "c plus plus"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "go": {
+      "aliases": [
+        "golang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "rust": {
+      "aliases": [
+        "rust lang",
+        "rust programming"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "sql": {
+      "aliases": [
+        "mysql",
+        "postgresql",
+        "postgres",
+        "sqlite",
+        "pl/sql",
+        "t-sql",
+        "database querying"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "nosql": {
+      "aliases": [
+        "mongodb",
+        "cassandra",
+        "dynamodb",
+        "redis",
+        "couchdb"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "react": {
+      "aliases": [
+        "reactjs",
+        "react.js",
+        "react js"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "vue": {
+      "aliases": [
+        "vuejs",
+        "vue.js",
+        "vue js"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "angular": {
+      "aliases": [
+        "angularjs",
+        "angular.js"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript",
+        "typescript"
+      ]
+    },
+    "html": {
+      "aliases": [
+        "html5",
+        "hypertext markup"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "css": {
+      "aliases": [
+        "css3",
+        "sass",
+        "scss",
+        "less",
+        "tailwind",
+        "bootstrap",
+        "styled-components"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "html"
+      ]
+    },
+    "django": {
+      "aliases": [
+        "django framework",
+        "django rest framework",
+        "drf"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "fastapi": {
+      "aliases": [
+        "fast api"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "flask": {
+      "aliases": [
+        "flask python",
+        "flask framework"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "spring": {
+      "aliases": [
+        "spring boot",
+        "spring framework",
+        "spring mvc"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "java"
+      ]
+    },
+    "express": {
+      "aliases": [
+        "expressjs",
+        "express.js"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "docker": {
+      "aliases": [
+        "containerization",
+        "docker container",
+        "dockerfile"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "kubernetes": {
+      "aliases": [
+        "k8s",
+        "kubectl",
+        "helm",
+        "kubernetes orchestration"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "docker"
+      ]
+    },
+    "aws": {
+      "aliases": [
+        "amazon web services",
+        "amazon aws",
+        "aws cloud"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "azure": {
+      "aliases": [
+        "microsoft azure",
+        "azure cloud",
+        "ms azure"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "gcp": {
+      "aliases": [
+        "google cloud",
+        "google cloud platform",
+        "google cloud services"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "ci/cd": {
+      "aliases": [
+        "continuous integration",
+        "continuous deployment",
+        "continuous delivery",
+        "cicd",
+        "ci cd"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "git"
+      ]
+    },
+    "git": {
+      "aliases": [
+        "git version control",
+        "github",
+        "gitlab",
+        "bitbucket",
+        "git scm"
+      ],
+      "category": "tools",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "linux": {
+      "aliases": [
+        "linux os",
+        "ubuntu",
+        "debian",
+        "centos",
+        "rhel",
+        "linux administration"
+      ],
+      "category": "os",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "machine learning": {
+      "aliases": [
+        "ml",
+        "machine learning engineering",
+        "applied ml"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "python",
+        "statistics"
+      ]
+    },
+    "deep learning": {
+      "aliases": [
+        "neural networks",
+        "deep neural networks",
+        "dl"
+      ],
+      "category": "data_science",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "machine learning"
+      ]
+    },
+    "data analysis": {
+      "aliases": [
+        "pandas",
+        "numpy",
+        "data wrangling",
+        "data cleaning",
+        "eda",
+        "exploratory data analysis"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python",
+        "sql"
+      ]
+    },
+    "statistics": {
+      "aliases": [
+        "statistical analysis",
+        "stats",
+        "statistical modeling",
+        "probability"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "data visualization": {
+      "aliases": [
+        "matplotlib",
+        "seaborn",
+        "plotly",
+        "tableau",
+        "power bi",
+        "data viz",
+        "powerbi"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "nlp": {
+      "aliases": [
+        "natural language processing",
+        "text processing",
+        "nlp engineering"
+      ],
+      "category": "data_science",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "machine learning",
+        "python"
+      ]
+    },
+    "computer vision": {
+      "aliases": [
+        "cv",
+        "image processing",
+        "object detection"
+      ],
+      "category": "data_science",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "deep learning"
+      ]
+    },
+    "rest api": {
+      "aliases": [
+        "restful api",
+        "rest apis",
+        "restful",
+        "rest services",
+        "api design"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "graphql": {
+      "aliases": [
+        "graph ql",
+        "gql"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "microservices": {
+      "aliases": [
+        "microservice architecture",
+        "micro services"
+      ],
+      "category": "architecture",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "rest api"
+      ]
+    },
+    "system design": {
+      "aliases": [
+        "software architecture",
+        "system architecture",
+        "high level design",
+        "hld",
+        "low level design"
+      ],
+      "category": "architecture",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "agile": {
+      "aliases": [
+        "agile methodology",
+        "agile development",
+        "agile framework"
+      ],
+      "category": "methodology",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "testing": {
+      "aliases": [
+        "unit testing",
+        "integration testing",
+        "test automation",
+        "tdd",
+        "test driven development",
+        "bdd"
+      ],
+      "category": "quality",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "security": {
+      "aliases": [
+        "cybersecurity",
+        "owasp",
+        "authentication",
+        "oauth",
+        "jwt",
+        "encryption",
+        "ssl",
+        "tls",
+        "penetration testing"
+      ],
+      "category": "security",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "terraform": {
+      "aliases": [
+        "terraform iac",
+        "hashicorp terraform"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "monitoring": {
+      "aliases": [
+        "prometheus",
+        "grafana",
+        "elk stack",
+        "datadog",
+        "newrelic",
+        "observability",
+        "logging"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "product management": {
+      "aliases": [
+        "product manager",
+        "pm",
+        "product owner",
+        "product strategy"
+      ],
+      "category": "management",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "communication": {
+      "aliases": [
+        "presentation",
+        "stakeholder management",
+        "technical writing",
+        "documentation"
+      ],
+      "category": "soft_skills",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "leadership": {
+      "aliases": [
+        "team management",
+        "mentoring",
+        "people management",
+        "team lead"
+      ],
+      "category": "soft_skills",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "data engineering": {
+      "aliases": [
+        "data engineer",
+        "data pipeline",
+        "etl",
+        "data platform"
+      ],
+      "category": "data_engineering",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "sql",
+        "python"
+      ]
+    },
+    "blockchain": {
+      "aliases": [
+        "smart contracts",
+        "solidity",
+        "web3",
+        "ethereum",
+        "defi"
+      ],
+      "category": "emerging",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "excel": {
+      "aliases": [
+        "microsoft excel",
+        "spreadsheet",
+        "pivot tables",
+        "vlookup",
+        "power query"
+      ],
+      "category": "tools",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "project management": {
+      "aliases": [
+        "pmp",
+        "project planning",
+        "risk management",
+        "stakeholder management",
+        "ms project"
+      ],
+      "category": "management",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "salesforce": {
+      "aliases": [
+        "sfdc",
+        "salesforce crm",
+        "salesforce platform"
+      ],
+      "category": "crm",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "devops": {
+      "aliases": [
+        "site reliability",
+        "sre",
+        "platform engineering"
+      ],
+      "category": "devops",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "linux",
+        "docker",
+        "ci/cd"
+      ]
+    },
+    "kotlin": {
+      "aliases": [
+        "kotlin lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "java"
+      ]
+    },
+    "swift": {
+      "aliases": [
+        "swift lang",
+        "ios swift"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "scala": {
+      "aliases": [
+        "scala lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "java"
+      ]
+    },
+    "r": {
+      "aliases": [
+        "r language",
+        "r programming",
+        "r lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "matlab": {
+      "aliases": [
+        "matlab programming"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "c": {
+      "aliases": [
+        "c language",
+        "c programming",
+        "c lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "c#": {
+      "aliases": [
+        "csharp",
+        "c sharp",
+        "dotnet c#",
+        "c# .net"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "php": {
+      "aliases": [
+        "php programming",
+        "php lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "ruby": {
+      "aliases": [
+        "ruby lang",
+        "ruby programming"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "perl": {
+      "aliases": [
+        "perl lang"
+      ],
+      "category": "programming",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "bash": {
+      "aliases": [
+        "bash scripting",
+        "shell scripting",
+        "bash script",
+        "shell script",
+        "sh scripting"
+      ],
+      "category": "os",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "powershell": {
+      "aliases": [
+        "powershell scripting",
+        "ps1"
+      ],
+      "category": "os",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "next.js": {
+      "aliases": [
+        "nextjs",
+        "next js"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "react",
+        "javascript"
+      ]
+    },
+    "nuxt.js": {
+      "aliases": [
+        "nuxtjs",
+        "nuxt js"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "vue",
+        "javascript"
+      ]
+    },
+    "svelte": {
+      "aliases": [
+        "svelte js",
+        "sveltejs"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "redux": {
+      "aliases": [
+        "redux toolkit",
+        "react redux"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "react"
+      ]
+    },
+    "tailwind": {
+      "aliases": [
+        "tailwind css",
+        "tailwindcss"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "css"
+      ]
+    },
+    "webpack": {
+      "aliases": [
+        "webpack bundler"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "vite": {
+      "aliases": [
+        "vite js",
+        "vitejs"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "storybook": {
+      "aliases": [
+        "storybook ui"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate"
+      ],
+      "prerequisites": [
+        "react"
+      ]
+    },
+    "jest": {
+      "aliases": [
+        "jest testing",
+        "jest js"
+      ],
+      "category": "quality",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "cypress": {
+      "aliases": [
+        "cypress testing",
+        "cypress e2e"
+      ],
+      "category": "quality",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "playwright": {
+      "aliases": [
+        "playwright testing",
+        "microsoft playwright"
+      ],
+      "category": "quality",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "spring boot": {
+      "aliases": [
+        "springboot",
+        "spring framework",
+        "spring"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "java"
+      ]
+    },
+    "express.js": {
+      "aliases": [
+        "expressjs",
+        "express js",
+        "express node"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "javascript",
+        "node.js"
+      ]
+    },
+    "node.js": {
+      "aliases": [
+        "nodejs",
+        "node js"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "javascript"
+      ]
+    },
+    "nestjs": {
+      "aliases": [
+        "nest.js",
+        "nest js"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "node.js",
+        "typescript"
+      ]
+    },
+    "laravel": {
+      "aliases": [
+        "laravel php"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "php"
+      ]
+    },
+    "rails": {
+      "aliases": [
+        "ruby on rails",
+        "ror",
+        "rails framework"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "ruby"
+      ]
+    },
+    "graphql api": {
+      "aliases": [
+        "graphql server",
+        "graphql backend",
+        "hasura"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "graphql"
+      ]
+    },
+    "grpc": {
+      "aliases": [
+        "grpc api",
+        "google rpc"
+      ],
+      "category": "backend",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "message queue": {
+      "aliases": [
+        "kafka",
+        "rabbitmq",
+        "message broker",
+        "apache kafka",
+        "event streaming"
+      ],
+      "category": "backend",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "postgresql": {
+      "aliases": [
+        "postgres",
+        "psql",
+        "postgres db"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "mysql": {
+      "aliases": [
+        "mysql db",
+        "mysql database"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "redis": {
+      "aliases": [
+        "redis cache",
+        "redis db"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "mongodb": {
+      "aliases": [
+        "mongo db",
+        "mongo",
+        "mongoose"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "elasticsearch": {
+      "aliases": [
+        "elastic search",
+        "es",
+        "opensearch"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "cassandra": {
+      "aliases": [
+        "apache cassandra",
+        "cassandra db"
+      ],
+      "category": "database",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "dynamodb": {
+      "aliases": [
+        "dynamo db",
+        "aws dynamodb"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "neo4j": {
+      "aliases": [
+        "graph database",
+        "neo4j db"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "sqlite": {
+      "aliases": [
+        "sqlite db",
+        "sqlite3"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "orm": {
+      "aliases": [
+        "sqlalchemy",
+        "hibernate",
+        "prisma",
+        "typeorm",
+        "sequelize",
+        "drizzle"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "serverless": {
+      "aliases": [
+        "aws lambda",
+        "azure functions",
+        "cloud functions",
+        "faas"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "aws"
+      ]
+    },
+    "cloud storage": {
+      "aliases": [
+        "aws s3",
+        "gcs",
+        "azure blob",
+        "object storage",
+        "s3 bucket"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "cdn": {
+      "aliases": [
+        "cloudfront",
+        "cdn services",
+        "content delivery"
+      ],
+      "category": "cloud",
+      "levels": [
+        "beginner",
+        "intermediate"
+      ],
+      "prerequisites": []
+    },
+    "ansible": {
+      "aliases": [
+        "ansible automation",
+        "ansible playbook"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "jenkins": {
+      "aliases": [
+        "jenkins ci",
+        "jenkins pipeline"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "github actions": {
+      "aliases": [
+        "gh actions",
+        "github ci",
+        "github workflows"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "git"
+      ]
+    },
+    "gitlab ci": {
+      "aliases": [
+        "gitlab cicd",
+        "gitlab pipelines",
+        "gitlab ci/cd"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "git"
+      ]
+    },
+    "helm": {
+      "aliases": [
+        "helm charts",
+        "kubernetes helm"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "kubernetes"
+      ]
+    },
+    "prometheus": {
+      "aliases": [
+        "prometheus monitoring"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "grafana": {
+      "aliases": [
+        "grafana dashboard",
+        "grafana monitoring"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "prometheus"
+      ]
+    },
+    "elk stack": {
+      "aliases": [
+        "elasticsearch logstash kibana",
+        "efk stack",
+        "elastic stack"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "elasticsearch"
+      ]
+    },
+    "nginx": {
+      "aliases": [
+        "nginx server",
+        "nginx proxy",
+        "nginx webserver"
+      ],
+      "category": "devops",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "tensorflow": {
+      "aliases": [
+        "tf",
+        "tensorflow 2",
+        "tensorflow keras",
+        "keras"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "python",
+        "deep learning"
+      ]
+    },
+    "pytorch": {
+      "aliases": [
+        "torch",
+        "pytorch framework"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "python",
+        "deep learning"
+      ]
+    },
+    "scikit-learn": {
+      "aliases": [
+        "sklearn",
+        "scikit learn"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python",
+        "machine learning"
+      ]
+    },
+    "pandas": {
+      "aliases": [
+        "pandas python",
+        "pd",
+        "data analysis pandas"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "numpy": {
+      "aliases": [
+        "numpy python",
+        "np"
+      ],
+      "category": "data_science",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "llm": {
+      "aliases": [
+        "large language models",
+        "gpt",
+        "llm fine-tuning",
+        "prompt engineering",
+        "llm engineering",
+        "genai",
+        "generative ai"
+      ],
+      "category": "emerging",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "mlops": {
+      "aliases": [
+        "ml operations",
+        "ml pipeline",
+        "model deployment",
+        "ml engineering"
+      ],
+      "category": "data_engineering",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "machine learning",
+        "docker"
+      ]
+    },
+    "airflow": {
+      "aliases": [
+        "apache airflow",
+        "airflow dags",
+        "workflow orchestration"
+      ],
+      "category": "data_engineering",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "spark": {
+      "aliases": [
+        "apache spark",
+        "pyspark",
+        "spark streaming"
+      ],
+      "category": "data_engineering",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "python"
+      ]
+    },
+    "dbt": {
+      "aliases": [
+        "data build tool",
+        "dbt core",
+        "dbt cloud"
+      ],
+      "category": "data_engineering",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "snowflake": {
+      "aliases": [
+        "snowflake db",
+        "snowflake cloud"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "bigquery": {
+      "aliases": [
+        "google bigquery",
+        "bq",
+        "gcp bigquery"
+      ],
+      "category": "database",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "sql"
+      ]
+    },
+    "cybersecurity": {
+      "aliases": [
+        "information security",
+        "infosec",
+        "cyber security",
+        "it security"
+      ],
+      "category": "security",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "penetration testing": {
+      "aliases": [
+        "pentesting",
+        "pen testing",
+        "ethical hacking",
+        "ethical hacker"
+      ],
+      "category": "security",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "linux",
+        "networking"
+      ]
+    },
+    "oauth": {
+      "aliases": [
+        "oauth2",
+        "openid connect",
+        "oidc",
+        "oauth 2.0"
+      ],
+      "category": "security",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "jwt": {
+      "aliases": [
+        "json web tokens",
+        "json web token",
+        "jwt auth"
+      ],
+      "category": "security",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "networking": {
+      "aliases": [
+        "computer networking",
+        "tcp/ip",
+        "network protocols",
+        "tcp ip",
+        "dns",
+        "http",
+        "https"
+      ],
+      "category": "security",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "design patterns": {
+      "aliases": [
+        "software design patterns",
+        "gang of four",
+        "gof patterns",
+        "oop patterns"
+      ],
+      "category": "architecture",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "event-driven": {
+      "aliases": [
+        "event driven architecture",
+        "eda",
+        "event sourcing",
+        "cqrs"
+      ],
+      "category": "architecture",
+      "levels": [
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "microservices"
+      ]
+    },
+    "api gateway": {
+      "aliases": [
+        "api management",
+        "kong",
+        "apigee",
+        "aws api gateway"
+      ],
+      "category": "architecture",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "rest api"
+      ]
+    },
+    "scrum": {
+      "aliases": [
+        "scrum master",
+        "scrum methodology",
+        "sprint planning"
+      ],
+      "category": "methodology",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "agile"
+      ]
+    },
+    "jira": {
+      "aliases": [
+        "jira software",
+        "atlassian jira",
+        "jira board"
+      ],
+      "category": "tools",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "technical writing": {
+      "aliases": [
+        "documentation",
+        "tech writing",
+        "technical documentation"
+      ],
+      "category": "soft_skills",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "code review": {
+      "aliases": [
+        "peer review",
+        "pull request review",
+        "pr review"
+      ],
+      "category": "soft_skills",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "mobile development": {
+      "aliases": [
+        "mobile dev",
+        "android development",
+        "ios development",
+        "cross platform"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": []
+    },
+    "react native": {
+      "aliases": [
+        "reactnative",
+        "react-native"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": [
+        "react",
+        "javascript"
+      ]
+    },
+    "flutter": {
+      "aliases": [
+        "flutter dart",
+        "flutter mobile",
+        "dart"
+      ],
+      "category": "frontend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    "ar/vr": {
+      "aliases": [
+        "augmented reality",
+        "virtual reality",
+        "mixed reality",
+        "xr",
+        "unity"
+      ],
+      "category": "emerging",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "prerequisites": []
+    },
+    ".net": {
+      "aliases": [
+        "dotnet",
+        ".net core",
+        "asp.net",
+        "asp net",
+        "dotnet core"
+      ],
+      "category": "backend",
+      "levels": [
+        "beginner",
+        "intermediate",
+        "advanced",
+        "expert"
+      ],
+      "prerequisites": [
+        "c#"
+      ]
+    }
+  },
+  "course_catalog": {
+    "python_beginner": {
+      "title": "Python Fundamentals",
+      "skill": "python",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 20,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=eWRfhZUzrAc",
+      "free": true,
+      "description": "Complete Python fundamentals: syntax, data structures, OOP, file I/O.",
+      "outcomes": [
+        "Write clean Python scripts",
+        "Understand OOP",
+        "Handle files and exceptions"
+      ]
+    },
+    "python_intermediate": {
+      "title": "Python for Professionals",
+      "skill": "python",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 30,
+      "provider": "Coursera (Google)",
+      "url": "https://www.coursera.org/professional-certificates/google-it-automation",
+      "free": false,
+      "description": "Advanced Python: decorators, generators, async, testing, packaging.",
+      "outcomes": [
+        "Build production-grade Python code",
+        "Write async programs",
+        "Package and test modules"
+      ]
+    },
+    "javascript_beginner": {
+      "title": "JavaScript Algorithms and Data Structures",
+      "skill": "javascript",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 25,
+      "provider": "freeCodeCamp",
+      "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+      "free": true,
+      "description": "Modern JavaScript from scratch: ES6+, async/await, DOM, fetch API.",
+      "outcomes": [
+        "Write modern JS",
+        "Use async/await",
+        "Manipulate the DOM"
+      ]
+    },
+    "typescript_beginner": {
+      "title": "TypeScript Full Course",
+      "skill": "typescript",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 10,
+      "provider": "Traversy Media",
+      "url": "https://www.youtube.com/watch?v=30LWjhZzg50",
+      "free": true,
+      "description": "TypeScript fundamentals: types, interfaces, generics, decorators.",
+      "outcomes": [
+        "Add types to JS code",
+        "Use interfaces and generics",
+        "Configure tsconfig"
+      ]
+    },
+    "react_beginner": {
+      "title": "React Full Course",
+      "skill": "react",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 18,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=bMknfKXIFA8",
+      "free": true,
+      "description": "React from scratch: hooks, state, props, routing, API calls.",
+      "outcomes": [
+        "Build React components",
+        "Manage state with hooks",
+        "Call REST APIs"
+      ]
+    },
+    "docker_beginner": {
+      "title": "Docker Fundamentals",
+      "skill": "docker",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 8,
+      "provider": "TechWorld with Nana",
+      "url": "https://www.youtube.com/watch?v=3c-iBn73dDE",
+      "free": true,
+      "description": "Docker from scratch: containers, images, Dockerfile, compose.",
+      "outcomes": [
+        "Build Docker images",
+        "Run containers",
+        "Use Docker Compose"
+      ]
+    },
+    "docker_intermediate": {
+      "title": "Docker Deep Dive",
+      "skill": "docker",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 8,
+      "provider": "Nigel Poulton (Pluralsight)",
+      "url": "https://www.pluralsight.com/courses/docker-deep-dive-update",
+      "free": false,
+      "description": "Multi-stage builds, security, overlay networks, volumes, Swarm basics.",
+      "outcomes": [
+        "Optimize Docker images",
+        "Understand container security",
+        "Use multi-stage builds"
+      ]
+    },
+    "kubernetes_beginner": {
+      "title": "Kubernetes Crash Course",
+      "skill": "kubernetes",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 15,
+      "provider": "TechWorld with Nana",
+      "url": "https://www.youtube.com/watch?v=s_o8dwzRlu4",
+      "free": true,
+      "description": "Kubernetes fundamentals: pods, deployments, services, ingress.",
+      "outcomes": [
+        "Deploy apps to K8s",
+        "Configure services",
+        "Use kubectl"
+      ]
+    },
+    "kubernetes_intermediate": {
+      "title": "Certified Kubernetes Administrator (CKA) Prep",
+      "skill": "kubernetes",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 30,
+      "provider": "Udemy (Mumshad Mannambeth)",
+      "url": "https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/",
+      "free": false,
+      "description": "RBAC, networking, storage, cluster upgrades, troubleshooting.",
+      "outcomes": [
+        "CKA certification ready",
+        "Manage cluster lifecycle",
+        "Implement RBAC"
+      ]
+    },
+    "aws_beginner": {
+      "title": "AWS Cloud Practitioner Essentials",
+      "skill": "aws",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 20,
+      "provider": "AWS Training",
+      "url": "https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/",
+      "free": true,
+      "description": "Foundation of AWS services: compute, storage, networking, security.",
+      "outcomes": [
+        "Navigate AWS console",
+        "Deploy services",
+        "Understand pricing model"
+      ]
+    },
+    "aws_intermediate": {
+      "title": "AWS Solutions Architect Associate",
+      "skill": "aws",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 40,
+      "provider": "Adrian Cantrill",
+      "url": "https://learn.cantrill.io/p/aws-certified-solutions-architect-associate",
+      "free": false,
+      "description": "Advanced AWS: serverless, CDN, high availability, security, migration.",
+      "outcomes": [
+        "Design scalable AWS architectures",
+        "SAA-C03 certification ready",
+        "Cost-optimized deployments"
+      ]
+    },
+    "sql_beginner": {
+      "title": "SQL for Data Analysis",
+      "skill": "sql",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 12,
+      "provider": "Mode Analytics",
+      "url": "https://mode.com/sql-tutorial/",
+      "free": true,
+      "description": "SELECT, JOINs, aggregations, subqueries, window functions.",
+      "outcomes": [
+        "Write complex queries",
+        "Use window functions",
+        "Optimize query performance"
+      ]
+    },
+    "machine_learning_beginner": {
+      "title": "Machine Learning Specialization",
+      "skill": "machine learning",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 60,
+      "provider": "Coursera (Andrew Ng)",
+      "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+      "free": false,
+      "description": "Supervised/unsupervised learning, neural networks, decision trees.",
+      "outcomes": [
+        "Build and evaluate ML models",
+        "Choose appropriate algorithms",
+        "Handle real datasets"
+      ]
+    },
+    "git_beginner": {
+      "title": "Git & GitHub Full Course",
+      "skill": "git",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 6,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=RGOj5yH7evk",
+      "free": true,
+      "description": "Git fundamentals: commits, branches, merge, rebase, pull requests.",
+      "outcomes": [
+        "Use Git for version control",
+        "Collaborate on GitHub",
+        "Handle merge conflicts"
+      ]
+    },
+    "linux_beginner": {
+      "title": "Linux Command Line Full Course",
+      "skill": "linux",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 8,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=iwolPf6kN-k",
+      "free": true,
+      "description": "Linux fundamentals: filesystem, shell, permissions, processes, networking.",
+      "outcomes": [
+        "Navigate Linux filesystem",
+        "Write bash scripts",
+        "Manage users and permissions"
+      ]
+    },
+    "cicd_beginner": {
+      "title": "CI/CD Pipeline Full Course",
+      "skill": "ci/cd",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 10,
+      "provider": "TechWorld with Nana",
+      "url": "https://www.youtube.com/watch?v=1hvMXirx9t0",
+      "free": true,
+      "description": "CI/CD concepts with GitHub Actions and Jenkins.",
+      "outcomes": [
+        "Build CI pipelines",
+        "Automate deployments",
+        "Configure test stages"
+      ]
+    },
+    "system_design_intermediate": {
+      "title": "System Design Interview \u2014 An Insider's Guide",
+      "skill": "system design",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "reading",
+      "hours": 20,
+      "provider": "Alex Xu (Book)",
+      "url": "https://www.amazon.com/System-Design-Interview-insiders-Second/dp/B08CMF2CQF",
+      "free": false,
+      "description": "URL shortener, rate limiter, Twitter, YouTube, Uber \u2014 design from scratch.",
+      "outcomes": [
+        "Design scalable systems",
+        "Handle millions of users",
+        "Make architecture tradeoffs"
+      ]
+    },
+    "testing_beginner": {
+      "title": "Software Testing Full Course",
+      "skill": "testing",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 10,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=r9HdJ8P6GQI",
+      "free": true,
+      "description": "Unit testing, TDD, integration tests, mocking, coverage.",
+      "outcomes": [
+        "Write unit tests",
+        "Practice TDD",
+        "Measure code coverage"
+      ]
+    },
+    "data_analysis_beginner": {
+      "title": "Data Analysis with Python",
+      "skill": "data analysis",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 15,
+      "provider": "freeCodeCamp",
+      "url": "https://www.freecodecamp.org/learn/data-analysis-with-python/",
+      "free": true,
+      "description": "Pandas, NumPy, Matplotlib \u2014 data wrangling, EDA, and visualization.",
+      "outcomes": [
+        "Clean messy datasets",
+        "Perform EDA",
+        "Visualize data insights"
+      ]
+    },
+    "terraform_beginner": {
+      "title": "Terraform Beginner to Advanced",
+      "skill": "terraform",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 14,
+      "provider": "FreeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=SLB_c_ayRMo",
+      "free": true,
+      "description": "Infrastructure as code with Terraform: providers, modules, state.",
+      "outcomes": [
+        "Write Terraform configs",
+        "Manage cloud resources",
+        "Use remote state"
+      ]
+    },
+    "microservices_intermediate": {
+      "title": "Microservices with Docker & K8s",
+      "skill": "microservices",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 20,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=hmkF77F9TLw",
+      "free": true,
+      "description": "Design and deploy microservices using Docker, Kubernetes, and API gateways.",
+      "outcomes": [
+        "Design microservice systems",
+        "Deploy with K8s",
+        "Implement service discovery"
+      ]
+    },
+    "deep_learning_intermediate": {
+      "title": "Deep Learning Specialization",
+      "skill": "deep learning",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 80,
+      "provider": "Coursera (Andrew Ng)",
+      "url": "https://www.coursera.org/specializations/deep-learning",
+      "free": false,
+      "description": "CNNs, RNNs, optimization, batch norm, hyperparameter tuning.",
+      "outcomes": [
+        "Build deep learning models",
+        "Tune neural networks",
+        "Apply DL to real problems"
+      ]
+    },
+    "security_beginner": {
+      "title": "Cybersecurity Full Course",
+      "skill": "cybersecurity",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 15,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=U_P23SqJaDc",
+      "free": true,
+      "description": "Security fundamentals: threats, vulnerabilities, encryption, network security.",
+      "outcomes": [
+        "Identify common threats",
+        "Implement basic security",
+        "Understand cryptography"
+      ]
+    },
+    "agile_beginner": {
+      "title": "Agile Project Management",
+      "skill": "agile",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 8,
+      "provider": "Coursera",
+      "url": "https://www.coursera.org/learn/agile-development-and-scrum",
+      "free": false,
+      "description": "Agile principles, Scrum ceremonies, sprint planning, retrospectives.",
+      "outcomes": [
+        "Run Scrum ceremonies",
+        "Estimate user stories",
+        "Facilitate retrospectives"
+      ]
+    },
+    "monitoring_beginner": {
+      "title": "Prometheus & Grafana Complete Tutorial",
+      "skill": "monitoring",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 10,
+      "provider": "TechWorld with Nana (YouTube)",
+      "url": "https://www.youtube.com/watch?v=QoDqxm7ybLc",
+      "free": true,
+      "description": "Metrics, dashboards, alerting, log aggregation with ELK.",
+      "outcomes": [
+        "Set up monitoring stack",
+        "Create dashboards",
+        "Configure alerts"
+      ]
+    },
+    "postgresql_beginner": {
+      "title": "PostgreSQL for Beginners",
+      "skill": "postgresql",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 12,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=qw--VYLpxG4",
+      "free": true,
+      "description": "Full PostgreSQL course covering queries, indexes, and administration.",
+      "outcomes": [
+        "Write complex SQL queries",
+        "Manage databases and users",
+        "Understand indexing"
+      ]
+    },
+    "nodejs_beginner": {
+      "title": "Node.js Full Course",
+      "skill": "node.js",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 16,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=Oe421EPjeBE",
+      "free": true,
+      "description": "Node.js fundamentals: modules, async, Express, REST APIs.",
+      "outcomes": [
+        "Build REST APIs",
+        "Handle async operations",
+        "Use npm ecosystem"
+      ]
+    },
+    "ml_beginner": {
+      "title": "Machine Learning Crash Course",
+      "skill": "machine learning",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 30,
+      "provider": "Google",
+      "url": "https://developers.google.com/machine-learning/crash-course",
+      "free": true,
+      "description": "Google's ML crash course covering linear models, neural nets, and evaluation.",
+      "outcomes": [
+        "Train ML models",
+        "Evaluate model performance",
+        "Understand bias/variance"
+      ]
+    },
+    "graphql_beginner": {
+      "title": "GraphQL Full Course",
+      "skill": "graphql",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 10,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=ed8SzALpx1Q",
+      "free": true,
+      "description": "GraphQL queries, mutations, subscriptions, and schema design.",
+      "outcomes": [
+        "Write GraphQL queries",
+        "Design schemas",
+        "Integrate with React"
+      ]
+    },
+    "redis_beginner": {
+      "title": "Redis Crash Course",
+      "skill": "redis",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 6,
+      "provider": "Traversy Media",
+      "url": "https://www.youtube.com/watch?v=jgpVdJB2sKQ",
+      "free": true,
+      "description": "Redis data structures, caching strategies, pub/sub, and persistence.",
+      "outcomes": [
+        "Use Redis for caching",
+        "Implement pub/sub",
+        "Configure persistence"
+      ]
+    },
+    "pandas_beginner": {
+      "title": "Pandas for Data Analysis",
+      "skill": "pandas",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 12,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=r-uOLxNrNk8",
+      "free": true,
+      "description": "Data manipulation with Pandas: DataFrames, groupby, merge, visualization.",
+      "outcomes": [
+        "Manipulate DataFrames",
+        "Aggregate and pivot data",
+        "Clean messy datasets"
+      ]
+    },
+    "pytorch_beginner": {
+      "title": "PyTorch for Deep Learning",
+      "skill": "pytorch",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 25,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=GIsg-ZUy0MY",
+      "free": true,
+      "description": "PyTorch from scratch: tensors, autograd, CNNs, RNNs, transformers.",
+      "outcomes": [
+        "Build neural networks",
+        "Train on GPU",
+        "Deploy models"
+      ]
+    },
+    "systemdesign_intermediate": {
+      "title": "System Design Primer",
+      "skill": "system design",
+      "target_level": "advanced",
+      "from_level": "intermediate",
+      "type": "course",
+      "hours": 20,
+      "provider": "Gaurav Sen",
+      "url": "https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX",
+      "free": true,
+      "description": "Design scalable systems: load balancers, caches, databases, queues.",
+      "outcomes": [
+        "Design distributed systems",
+        "Choose appropriate data stores",
+        "Handle scale and reliability"
+      ]
+    },
+    "nextjs_beginner": {
+      "title": "Next.js Full Course",
+      "skill": "next.js",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 12,
+      "provider": "Traversy Media",
+      "url": "https://www.youtube.com/watch?v=mTz0GXj8NN0",
+      "free": true,
+      "description": "Next.js fundamentals: SSR, SSG, API routes, app router.",
+      "outcomes": [
+        "Build SSR React apps",
+        "Implement API routes",
+        "Deploy to Vercel"
+      ]
+    },
+    "llm_beginner": {
+      "title": "LLM Engineering: Master AI & LLMs",
+      "skill": "llm",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 20,
+      "provider": "DeepLearning.AI",
+      "url": "https://www.deeplearning.ai/short-courses/",
+      "free": true,
+      "description": "Build LLM-powered apps: RAG, agents, fine-tuning, prompt engineering.",
+      "outcomes": [
+        "Build RAG pipelines",
+        "Fine-tune LLMs",
+        "Deploy AI applications"
+      ]
+    },
+    "spark_beginner": {
+      "title": "Apache Spark Full Course",
+      "skill": "spark",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 20,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=_C8kWso4ne4",
+      "free": true,
+      "description": "Spark fundamentals: RDDs, DataFrames, Spark SQL, streaming.",
+      "outcomes": [
+        "Process large datasets",
+        "Write Spark jobs",
+        "Use Spark SQL"
+      ]
+    },
+    "mongodb_beginner": {
+      "title": "MongoDB Full Course",
+      "skill": "mongodb",
+      "target_level": "intermediate",
+      "from_level": "beginner",
+      "type": "course",
+      "hours": 8,
+      "provider": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=ofme2o29ngU",
+      "free": true,
+      "description": "MongoDB CRUD, aggregation pipeline, indexes, schema design.",
+      "outcomes": [
+        "Perform CRUD operations",
+        "Design schemas",
+        "Write aggregation pipelines"
+      ]
+    }
+  },
+  "level_order": [
+    "none",
+    "beginner",
+    "intermediate",
+    "advanced",
+    "expert"
+  ],
+  "experience_to_level": {
+    "0": "none",
+    "1": "beginner",
+    "2": "intermediate",
+    "3": "advanced",
+    "5": "expert"
+  }
+}

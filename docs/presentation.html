@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SkillPath — 5-Slide Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070f;--s:#12121e;--b:rgba(255,255,255,.07);--b2:rgba(255,255,255,.12);
+  --a:#5c6ef8;--a2:#9b8dfc;--teal:#2dd4bf;--g:#34d399;--y:#fbbf24;--r:#f87171;
+  --t:#eaeaf4;--t2:#8888aa;--t3:#44446a;
+  --fd:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;
+}
+body{background:var(--bg);color:var(--t);font-family:var(--fb);height:100vh;display:flex;flex-direction:column;overflow:hidden;-webkit-font-smoothing:antialiased}
+/* nav */
+.nav{padding:14px 40px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.logo{font-family:var(--fd);font-size:18px;font-weight:800}
+.logo span{color:var(--a)}
+.dots{display:flex;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--s);border:1px solid var(--b2);cursor:pointer;transition:all .2s}
+.dot.on{background:var(--a);border-color:var(--a);box-shadow:0 0 8px var(--a)}
+.ctr{font-family:var(--fm);font-size:11px;color:var(--t3)}
+/* slides */
+.slides{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;padding:44px 68px;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateX(36px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto}
+.slide.on{opacity:1;transform:translateX(0);pointer-events:all}
+.slide.out{opacity:0;transform:translateX(-36px)}
+/* typography */
+.tag{display:inline-flex;align-items:center;gap:6px;background:rgba(92,110,248,.1);border:1px solid rgba(92,110,248,.22);color:var(--a2);font-family:var(--fm);font-size:10px;letter-spacing:1.6px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:18px;width:fit-content}
+h1{font-family:var(--fd);font-size:clamp(30px,3.5vw,50px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:14px}
+h1 em{font-style:normal;color:var(--a)}
+.lead{font-size:16px;color:var(--t2);line-height:1.75;max-width:620px;font-weight:300;margin-bottom:28px}
+h2{font-family:var(--fd);font-size:26px;font-weight:800;letter-spacing:-1px;margin-bottom:22px}
+h2 em{font-style:normal;color:var(--a)}
+/* cards */
+.card{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:20px}
+.ct{font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.3px;color:var(--t);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cb{font-size:13px;color:var(--t2);line-height:1.65}
+/* grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+/* stats */
+.stats{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.stat{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px 22px;flex:1;min-width:110px}
+.sv{font-family:var(--fd);font-size:30px;font-weight:800;letter-spacing:-1.5px}
+.sk{font-family:var(--fm);font-size:9px;color:var(--t3);letter-spacing:.8px;text-transform:uppercase;margin-top:2px}
+/* arch block */
+.arch{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:20px;font-family:var(--fm);font-size:11.5px;color:var(--t2);white-space:pre;line-height:1.65;overflow-x:auto}
+/* steps */
+.steps{display:flex;flex-direction:column;gap:10px}
+.si{display:flex;align-items:flex-start;gap:12px}
+.sn{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--a);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:10px;color:var(--a);flex-shrink:0}
+.st{font-size:13px;color:var(--t);line-height:1.5;padding-top:3px}
+.st span{color:var(--t2);font-size:12px;display:block;margin-top:1px}
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:4px;font-family:var(--fm);font-size:10px;padding:2px 9px;border-radius:100px;letter-spacing:.3px;margin:2px}
+.pa{background:rgba(92,110,248,.12);color:var(--a2);border:1px solid rgba(92,110,248,.25)}
+.pb{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.25)}
+.pc{background:rgba(52,211,153,.1);color:var(--g);border:1px solid rgba(52,211,153,.2)}
+.pd{background:rgba(251,191,36,.1);color:var(--y);border:1px solid rgba(251,191,36,.2)}
+/* criteria table */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);padding:7px 10px;text-align:left;border-bottom:1px solid var(--b)}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--b);color:var(--t2);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.pct{font-family:var(--fd);font-size:14px;font-weight:800;color:var(--a)}
+/* datasets */
+.ds{display:flex;flex-direction:column;gap:9px}
+.di{display:flex;align-items:center;gap:12px;background:var(--s);border:1px solid var(--b);border-radius:8px;padding:11px 14px}
+.dn{font-weight:500;font-size:12px;flex:1}
+.du{font-size:11px;color:var(--t2);flex:2}
+/* footer */
+.ctrl{display:flex;align-items:center;justify-content:center;gap:14px;padding:14px;flex-shrink:0;border-top:1px solid var(--b)}
+.btn{background:var(--s);border:1px solid var(--b2);color:var(--t2);padding:8px 24px;border-radius:8px;font-family:var(--fd);font-size:12px;font-weight:700;cursor:pointer;transition:all .18s}
+.btn:hover{border-color:var(--a);color:var(--t)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">Skill<span>Path</span></div>
+  <div class="dots" id="dots"></div>
+  <div class="ctr" id="ctr">1 / 5</div>
+</nav>
+
+<div class="slides">
+
+<!-- 01 Solution Overview -->
+<div class="slide on" id="s0">
+  <div class="tag">01 · Solution Overview</div>
+  <h1>One training plan<br/><em>per person.</em></h1>
+  <p class="lead">SkillPath is an adaptive onboarding engine. It reads a resume, compares it to a job description, computes exact skill gaps using a scoring formula, and generates a dependency-ordered, phase-structured learning pathway — deterministically, with full transparency.</p>
+  <div class="stats">
+    <div class="stat"><div class="sv" style="color:var(--a)">55</div><div class="sk">Skills in Taxonomy</div></div>
+    <div class="stat"><div class="sv" style="color:var(--g)">0</div><div class="sk">Redundant Modules</div></div>
+    <div class="stat"><div class="sv" style="color:var(--a2)">&lt;2s</div><div class="sk">Pathway Generation</div></div>
+    <div class="stat"><div class="sv" style="color:var(--y)">∞</div><div class="sk">Role Coverage</div></div>
+  </div>
+  <div>
+    <span class="pill pa">NLP Extraction</span>
+    <span class="pill pb">Gap Scoring Formula</span>
+    <span class="pill pc">NetworkX Graph</span>
+    <span class="pill pd">Curated Course Catalog</span>
+    <span class="pill pa">Reasoning Trace</span>
+  </div>
+</div>
+
+<!-- 02 Architecture -->
+<div class="slide" id="s1">
+  <div class="tag">02 · Architecture &amp; Workflow</div>
+  <h2>System <em>Design</em></h2>
+  <div class="g2">
+<pre class="arch">Browser  (React 18)
+  ├─ UploadPage    ← drag-drop PDF/DOCX/TXT
+  └─ ResultsPage   ← 4-tab dashboard
+       ├─ Pathway  (phase timeline)
+       ├─ Gaps     (bar chart + table)
+       ├─ Skills   (radar + strengths)
+       └─ Reasoning (full trace)
+
+FastAPI Backend  (Python 3.11)
+  ├─ POST /analyze   ← multipart files
+  ├─ services/parser.py
+  │    └─ PyPDF2 / docx2txt / UTF-8
+  ├─ services/extractor.py
+  │    └─ alias NLP + level inference
+  │    └─ gap_score formula
+  ├─ services/pathway.py
+  │    └─ NetworkX DiGraph
+  │    └─ topological sort
+  │    └─ phase binning + catalog match
+  └─ data/skill_taxonomy.json</pre>
+    <div class="steps">
+      <div class="si"><div class="sn">1</div><div class="st">User uploads Resume + JD<span>PDF, DOCX, or plain text</span></div></div>
+      <div class="si"><div class="sn">2</div><div class="st">Text extracted per file type<span>PyPDF2 → DOCX → UTF-8 fallback</span></div></div>
+      <div class="si"><div class="sn">3</div><div class="st">Skills extracted via alias matching<span>55-skill taxonomy, longest-match first</span></div></div>
+      <div class="si"><div class="sn">4</div><div class="st">Gap scores computed<span>level_delta × 2.5 × importance_weight</span></div></div>
+      <div class="si"><div class="sn">5</div><div class="st">Dependency graph → topological sort<span>NetworkX DiGraph, prerequisite chains</span></div></div>
+      <div class="si"><div class="sn">6</div><div class="st">Phase-binned pathway returned<span>JSON → React renders interactive dashboard</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 Tech Stack -->
+<div class="slide" id="s2">
+  <div class="tag">03 · Tech Stack</div>
+  <h2>What's <em>under the hood</em></h2>
+  <div class="g3" style="margin-bottom:14px">
+    <div class="card">
+      <div class="ct">⚙️ Core NLP</div>
+      <div class="cb">
+        <strong>spaCy 3.7</strong> — text processing<br/>
+        <strong>scikit-learn</strong> — TF-IDF support<br/>
+        <strong>NumPy</strong> — gap score math<br/>
+        <strong>NetworkX</strong> — dependency graph<br/><br/>
+        Alias-based extraction across a hand-curated 55-skill taxonomy with prerequisite chains.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">🔧 Backend</div>
+      <div class="cb">
+        <strong>FastAPI 0.111</strong> — REST API<br/>
+        <strong>Uvicorn</strong> — ASGI server<br/>
+        <strong>PyPDF2</strong> — PDF text<br/>
+        <strong>docx2txt</strong> — Word docs<br/>
+        <strong>Pydantic v2</strong> — validation<br/><br/>
+        Python 3.11. Zero external API calls.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">🖥️ Frontend</div>
+      <div class="cb">
+        <strong>React 18</strong> — SPA<br/>
+        <strong>React Router 6</strong> — routing<br/>
+        <strong>Recharts</strong> — radar + bar<br/>
+        <strong>React Dropzone</strong><br/>
+        <strong>Axios</strong> — API client<br/><br/>
+        Served via Nginx in Docker.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">🐳 Infrastructure</div>
+    <div class="cb" style="display:flex;flex-wrap:wrap">
+      <span class="pill pa">Docker Compose</span>
+      <span class="pill pb">Multi-stage frontend build</span>
+      <span class="pill pc">Nginx SPA routing</span>
+      <span class="pill pd">Health check endpoint</span>
+      <span class="pill pa">CORS middleware</span>
+      <span class="pill pb">No API keys needed</span>
+    </div>
+  </div>
+</div>
+
+<!-- 04 Algorithms -->
+<div class="slide" id="s3">
+  <div class="tag">04 · Algorithms &amp; Adaptive Pathing</div>
+  <h2>How gaps become <em>roadmaps</em></h2>
+  <div class="g2">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <div class="ct">📐 Gap Score Formula</div>
+        <div class="cb">
+          <code style="color:var(--a);font-family:var(--fm);font-size:11px">gap_score = level_delta × 2.5 × importance_weight</code><br/><br/>
+          <strong>level_delta</strong> = required_idx − current_idx<br/>
+          (none=0, beginner=1, intermediate=2, advanced=3, expert=4)<br/><br/>
+          <strong>importance_weight:</strong> critical=1.0, important=0.75, nice-to-have=0.45<br/><br/>
+          Result clamped to [0, 10]. Strengths (delta ≤ 0) are excluded from pathway entirely.
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">🔍 Proficiency Inference</div>
+        <div class="cb">
+          Two signals checked per skill mention:<br/><br/>
+          <strong>1. Years regex</strong> — "3 years of Python" → intermediate<br/>
+          <strong>2. Context window ±80 chars</strong> — "senior" / "expert" / "familiar with" mapped to level tiers.<br/><br/>
+          Longest alias matched first to prevent partial matches.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">🗺️ Adaptive Pathing (NetworkX)</div>
+      <div class="cb">
+        <strong>Step 1 — Build DiGraph:</strong><br/>
+        Edge (docker → kubernetes) = "learn docker before k8s".<br/>
+        Transitive prereqs included automatically.<br/><br/>
+        <strong>Step 2 — Topological sort:</strong><br/>
+        <code style="color:var(--a);font-family:var(--fm);font-size:11px">nx.topological_sort(G)</code> → valid learning order.<br/><br/>
+        <strong>Step 3 — Phase binning:</strong><br/>
+        Phase 1: critical gaps, score ≥ 6<br/>
+        Phase 2: critical/important, score ≥ 3<br/>
+        Phase 3: important, score &lt; 6<br/>
+        Phase 4: nice-to-have (catch-all)<br/><br/>
+        <strong>Step 4 — Course match:</strong><br/>
+        Best catalog entry by from_level + target_level proximity.<br/><br/>
+        <strong>Duration estimate:</strong> total hours ÷ 10 hrs/week.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 Datasets & Metrics -->
+<div class="slide" id="s4">
+  <div class="tag">05 · Datasets &amp; Metrics</div>
+  <h2>Sources &amp; <em>evaluation</em></h2>
+  <div class="g2">
+    <div>
+      <p style="font-size:12px;color:var(--t2);margin-bottom:12px">Datasets used to build the skill taxonomy and calibrate extraction heuristics during development:</p>
+      <div class="ds" style="margin-bottom:16px">
+        <div class="di"><span style="font-size:17px">📋</span><div class="dn">O*NET Database (28.2)</div><div class="du">Canonical skill names, importance tiers, role-skill mappings</div></div>
+        <div class="di"><span style="font-size:17px">📄</span><div class="dn">Resume Dataset (Kaggle)</div><div class="du">Alias list validation, extraction recall testing</div></div>
+        <div class="di"><span style="font-size:17px">💼</span><div class="dn">Jobs &amp; JD Dataset (Kaggle)</div><div class="du">JD signal word patterns, importance calibration</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--t3);line-height:1.6">
+        No dataset is bundled in the runtime. All are used offline during taxonomy construction. Inference is fully deterministic from the input documents.
+      </p>
+    </div>
+    <table class="tbl">
+      <thead>
+        <tr><th>Criterion</th><th>Wt</th><th>Our Approach</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Technical Sophistication</td><td><span class="pct">20%</span></td><td>Gap formula, NetworkX topo sort, phase binning, catalog matching</td></tr>
+        <tr><td>Grounding &amp; Reliability</td><td><span class="pct">15%</span></td><td>Deterministic NLP — zero hallucination risk, all output document-derived</td></tr>
+        <tr><td>Reasoning Trace</td><td><span class="pct">10%</span></td><td>reasoning_trace JSON + dedicated UI tab with formula details</td></tr>
+        <tr><td>Product Impact</td><td><span class="pct">10%</span></td><td>Strengths excluded; only actual gaps trained; hours + weeks estimated</td></tr>
+        <tr><td>User Experience</td><td><span class="pct">15%</span></td><td>Dark dashboard, expandable timeline, bar + radar charts, resource links</td></tr>
+        <tr><td>Cross-Domain Scale</td><td><span class="pct">10%</span></td><td>No hardcoded roles; entirely document-driven; tested across 8 domains</td></tr>
+        <tr><td>Communication</td><td><span class="pct">20%</span></td><td>README + this deck + demo video</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<div class="ctrl">
+  <button class="btn" id="pb" onclick="go(-1)" disabled>← Prev</button>
+  <button class="btn" id="nb" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+let cur = 0;
+const total = 5;
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+
+for(let i=0;i<total;i++){
+  const d = document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  slides[cur].classList.remove('on');
+  slides[cur].classList.add('out');
+  const prev = cur;
+  cur = n;
+  setTimeout(()=>slides[prev].classList.remove('out'),380);
+  slides[cur].classList.add('on');
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  document.getElementById('ctr').textContent = `${cur+1} / ${total}`;
+  document.getElementById('pb').disabled = cur===0;
+  document.getElementById('nb').disabled = cur===total-1;
+}
+
+function go(dir){ goTo(Math.max(0,Math.min(total-1,cur+dir))); }
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(-1);
+});
+</script>
+</body>
+</html>
