@@ -3,7 +3,7 @@
 <br />
 
 # 🎯 SkillGap
-### *From Resume to Roadmap — Instantly.*
+### *From Resume to Roadmap - Instantly.*
 
 **Upload your resume. Drop a job description. Get your personalised learning path in seconds.**
 
