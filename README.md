@@ -22,6 +22,8 @@
 
 <br />
 
+[View the Brief Technical Document (PDF)](HackOS_SkillGap_Documentation.pdf)
+
 </div>
 
 ---
