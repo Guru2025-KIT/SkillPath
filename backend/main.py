@@ -1,5 +1,5 @@
 """
-SkillPath AI-Adaptive Onboarding Engine
+SkillPath (From Resume to Roadmap - Instantly) AI-Adaptive Onboarding Engine 
 Backend API v2.0  |  FastAPI + spaCy + NetworkX + Claude AI
 """
 
