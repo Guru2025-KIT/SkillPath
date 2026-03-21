@@ -51,12 +51,16 @@ const rowDivider = { borderBottom:'1px solid var(--border)' };
 
 /* ─── TABS ────────────────────────────────────────────────────────────────── */
 const TABS = [
-  { id:'pathway',   label:'🗺 Pathway'   },
-  { id:'gaps',      label:'⚡ Gaps'      },
-  { id:'skills',    label:'📊 Skills'    },
-  { id:'timeline',  label:'📅 Timeline'  },
-  { id:'interview', label:'🎯 Interview' },
-  { id:'reasoning', label:'🧠 Reasoning' },
+  { id:'pathway',     label:'🗺 Pathway'     },
+  { id:'gaps',        label:'⚡ Gaps'        },
+  { id:'skills',      label:'📊 Skills'      },
+  { id:'timeline',    label:'📅 Timeline'    },
+  { id:'interview',   label:'🎯 Interview'   },
+  { id:'ats',         label:'🤖 ATS Score'   },
+  { id:'resume-tips', label:'✍️ Resume Tips'  },
+  { id:'roadmap',     label:'📆 Roadmap'     },
+  { id:'jobs',        label:'💼 Jobs'        },
+  { id:'reasoning',   label:'🧠 Reasoning'   },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
@@ -80,6 +84,10 @@ export default function ResultsPage({ data, onReset }) {
     overall_readiness_score = 0,
     estimated_total_weeks   = 0,
     reasoning_trace  = {},
+    ats_score        = null,
+    resume_suggestions = null,
+    weekly_roadmap   = null,
+    job_recommendations = null,
   } = data;
 
   const totalModules = learning_pathway.reduce((s,p) => s+(p.modules?.length||0), 0);
@@ -663,25 +671,540 @@ export default function ResultsPage({ data, onReset }) {
 
         {/* ══════ TAB: REASONING ══════ */}
         {tab==='reasoning' && (
-          <div className="fade-up" style={card}>
-            <div style={sectionTitle}>🧠 Reasoning Trace</div>
-            <p style={{ fontSize:13, color:'var(--text3)', marginBottom:20, lineHeight:1.6 }}>
-              Every decision made by the pathway engine is explained below. No black-box.
-            </p>
-            {Object.entries(reasoning_trace).map(([k,v]) => (
-              <div key={k} style={{ marginBottom:20 }}>
-                <div style={{ fontFamily:'var(--fm)', fontSize:10, color:'var(--accent)', letterSpacing:.8, textTransform:'uppercase', marginBottom:8 }}>
-                  {k.replace(/_/g,' ')}
-                </div>
-                <div style={{ fontSize:14, color:'var(--text2)', lineHeight:1.7,
-                  background:'var(--bg2)', padding:'14px 18px', borderRadius:8,
-                  borderLeft:'3px solid var(--accent)' }}>
-                  {v}
-                </div>
+          <div className="fade-up" style={{display:'flex',flexDirection:'column',gap:18}}>
+
+            {/* ── Section header ── */}
+            <div style={{...card, borderLeft:'3px solid var(--accent)'}}>
+              <div style={sectionTitle}>🧠 Full Reasoning Trace</div>
+              <p style={{fontSize:13,color:'var(--text3)',lineHeight:1.7,margin:0}}>
+                Every decision this engine made — gap scoring, pathway ordering, ATS simulation,
+                and job matching — is explained below in plain English. No black box, no guesswork.
+                Each section shows the exact formula or logic used to arrive at the result.
+              </p>
+            </div>
+
+            {/* ── 1. Pathway & Gap Analysis ── */}
+            <div style={card}>
+              <div style={{...sectionTitle, color:'var(--accent)'}}>
+                ⚡ 1 — Skill Gap Analysis & Pathway Logic
               </div>
-            ))}
+              {Object.entries(reasoning_trace).map(([k,v]) => (
+                <div key={k} style={{marginBottom:18}}>
+                  <div style={{fontFamily:'var(--fm)',fontSize:10,color:'var(--accent)',letterSpacing:.8,textTransform:'uppercase',marginBottom:8}}>
+                    {k.replace(/_/g,' ')}
+                  </div>
+                  <div style={{fontSize:13,color:'var(--text2)',lineHeight:1.75,
+                    background:'var(--bg2)',padding:'14px 18px',borderRadius:8,
+                    borderLeft:'3px solid var(--accent)'}}>
+                    {v}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* ── 2. ATS Score Reasoning ── */}
+            {ats_score && (
+              <div style={card}>
+                <div style={{...sectionTitle, color:'#2dd4bf'}}>
+                  🤖 2 — ATS Score Reasoning
+                </div>
+                <p style={{fontSize:13,color:'var(--text3)',lineHeight:1.7,marginBottom:18}}>
+                  The ATS score simulates how an Applicant Tracking System would rank this resume
+                  before a human ever reads it. It is computed across 5 independent dimensions,
+                  each weighted by real-world ATS priorities.
+                </p>
+
+                {/* Formula */}
+                <div style={{background:'var(--bg2)',border:'1px solid var(--border2)',borderRadius:10,
+                  padding:'14px 18px',marginBottom:18,fontFamily:'var(--fm)',fontSize:12,lineHeight:1.9}}>
+                  <div style={{color:'#2dd4bf',letterSpacing:.8,textTransform:'uppercase',fontSize:10,marginBottom:8}}>Score Formula</div>
+                  <div style={{color:'var(--text2)'}}>
+                    <span style={{color:'#2dd4bf'}}>total</span> = keyword_match (35) + section_presence (25) + quantification (20) + action_verbs (10) + length_density (10)
+                  </div>
+                  <div style={{color:'var(--text3)',fontSize:11,marginTop:6}}>
+                    Grade: A ≥ 85 · B ≥ 70 · C ≥ 55 · D ≥ 40 · F &lt; 40
+                  </div>
+                </div>
+
+                {/* Per-dimension explanation */}
+                {Object.values(ats_score.breakdown||{}).map((dim,i) => {
+                  const pct = Math.round((dim.score/dim.max)*100);
+                  const col = pct>=70?'#34d399':pct>=40?'#fbbf24':'#f87171';
+                  const explanations = {
+                    'Keyword Match':           `Matched ${ats_score.keyword_hit_rate}% of the JD's required keywords. Score = (matched_keywords / required_keywords) × 35. ${ats_score.missing_critical?.length ? `${ats_score.missing_critical.length} critical keywords are still absent from the resume.` : 'All critical keywords are present.'}`,
+                    'Section Structure':       `Detected resume sections and scored their presence. Critical sections (Experience, Education, Skills) contribute 18 pts; bonus sections (Summary, Projects, Certifications, Contact) contribute 7 pts. Missing sections are flagged as structural gaps.`,
+                    'Quantified Achievements': `Scanned for numeric evidence of impact — percentages, currency figures, user/team counts, and improvement verbs followed by numbers. Found ${ats_score.quantified_hits} quantified result${ats_score.quantified_hits!==1?'s':''} (max score at 5+). Quantification signals to ATS that the candidate measures their own work.`,
+                    'Action Verb Usage':       `Counted strong action verbs at the start of bullet points (built, designed, led, optimised, shipped, etc.). Found ${ats_score.action_verb_hits} action verb${ats_score.action_verb_hits!==1?'s':''} (max score at 5+). Passive phrases like "was responsible for" score zero.`,
+                    'Length & Density':        `Resume word count: ${ats_score.word_count} words. Optimal ATS range is 300–800 words. ${ats_score.word_count < 300 ? 'Resume is too short — ATS parsers expect more content.' : ats_score.word_count > 800 ? 'Resume may be too long — ATS systems often truncate after page 2.' : 'Word count is in the optimal range.'}`,
+                  };
+                  return (
+                    <div key={i} style={{marginBottom:14}}>
+                      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:6,gap:10}}>
+                        <div style={{fontFamily:'var(--fm)',fontSize:10,color:col,letterSpacing:.6,textTransform:'uppercase'}}>
+                          {dim.label}
+                        </div>
+                        <div style={{fontFamily:'var(--fm)',fontSize:11,color:col,flexShrink:0}}>
+                          {dim.score} / {dim.max} ({pct}%)
+                        </div>
+                      </div>
+                      <div style={{height:3,background:'var(--bg2)',borderRadius:2,overflow:'hidden',marginBottom:8}}>
+                        <div style={{height:'100%',width:`${pct}%`,background:col,borderRadius:2}}/>
+                      </div>
+                      <div style={{fontSize:12,color:'var(--text2)',lineHeight:1.65,
+                        background:'var(--bg2)',padding:'10px 14px',borderRadius:8,
+                        borderLeft:`2px solid ${col}`}}>
+                        {explanations[dim.label] || `Score: ${dim.score}/${dim.max}`}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* ── 3. Job Matching Reasoning ── */}
+            {job_recommendations && (
+              <div style={card}>
+                <div style={{...sectionTitle, color:'#a78bfa'}}>
+                  💼 3 — Job Matching Reasoning
+                </div>
+                <p style={{fontSize:13,color:'var(--text3)',lineHeight:1.7,marginBottom:18}}>
+                  Each role is scored by matching the candidate's detected skills against a curated
+                  profile of required and bonus skills. The fit percentage is computed using a
+                  weighted formula that prioritises required skills over bonus skills.
+                </p>
+
+                {/* Formula */}
+                <div style={{background:'var(--bg2)',border:'1px solid var(--border2)',borderRadius:10,
+                  padding:'14px 18px',marginBottom:18,fontFamily:'var(--fm)',fontSize:12,lineHeight:1.9}}>
+                  <div style={{color:'#a78bfa',letterSpacing:.8,textTransform:'uppercase',fontSize:10,marginBottom:8}}>Fit Formula</div>
+                  <div style={{color:'var(--text2)'}}>
+                    <span style={{color:'#a78bfa'}}>fit%</span> = (matched_required / total_required) × <span style={{color:'#34d399'}}>70</span>
+                    &nbsp;+&nbsp; (matched_bonus / total_bonus) × <span style={{color:'#fbbf24'}}>30</span>
+                  </div>
+                  <div style={{color:'var(--text3)',fontSize:11,marginTop:6}}>
+                    Ready ≥ 70% · Almost Ready 55–69% · Needs Work &lt; 55%
+                  </div>
+                </div>
+
+                {/* Per-role reasoning */}
+                {(job_recommendations.recommendations||[]).map((job,i) => {
+                  const col = job.ready?'#34d399':job.almost_ready?'#fbbf24':'var(--text3)';
+                  const status = job.ready?'✅ Ready':'🟡 Almost Ready';
+                  return (
+                    <div key={i} style={{marginBottom:14,padding:'14px 16px',
+                      background:'var(--bg2)',borderRadius:10,
+                      borderLeft:`2px solid ${col}`}}>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6,gap:10}}>
+                        <div style={{fontWeight:600,fontSize:13}}>{job.role}</div>
+                        <div style={{display:'flex',alignItems:'center',gap:10,flexShrink:0}}>
+                          {(job.ready||job.almost_ready) && (
+                            <span style={{fontFamily:'var(--fm)',fontSize:10,color:col}}>{status}</span>
+                          )}
+                          <span style={{fontFamily:'var(--fm)',fontSize:13,fontWeight:700,color:col}}>{job.fit_percent}%</span>
+                        </div>
+                      </div>
+                      <div style={{fontSize:12,color:'var(--text2)',lineHeight:1.65}}>
+                        Matched <strong style={{color:'#34d399'}}>{job.matched_skills.length}</strong> skill{job.matched_skills.length!==1?'s':''} ({job.matched_skills.slice(0,3).join(', ')}{job.matched_skills.length>3?'…':''}).
+                        {job.missing_required.length>0 ? (
+                          <span> Still missing <strong style={{color:'#f87171'}}>{job.missing_required.length}</strong> required skill{job.missing_required.length!==1?'s':''}: {job.missing_required.slice(0,3).join(', ')}{job.missing_required.length>3?'…':''}.</span>
+                        ) : (
+                          <span style={{color:'#34d399'}}> All required skills are present.</span>
+                        )}
+                        {job.strong_in.length>0 && (
+                          <span> Advanced/expert in: {job.strong_in.slice(0,3).join(', ')}.</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
           </div>
         )}
+
+        {/* ════ TAB: ATS SCORE ════ */}
+        {tab==='ats' && ats_score && (
+          <div className="fade-up">
+            {/* Score hero */}
+            <div style={{ ...card, marginBottom:18, display:'flex', gap:28, alignItems:'center', flexWrap:'wrap' }}>
+              <div style={{ textAlign:'center', minWidth:120 }}>
+                <div style={{ position:'relative', width:110, height:110, margin:'0 auto' }}>
+                  <svg width="110" height="110">
+                    <circle cx="55" cy="55" r="46" fill="none" stroke="var(--border2)" strokeWidth="7"/>
+                    <circle cx="55" cy="55" r="46" fill="none"
+                      stroke={ats_score.total_score>=70?'#34d399':ats_score.total_score>=50?'#fbbf24':'#f87171'}
+                      strokeWidth="7" strokeLinecap="round"
+                      strokeDasharray={`${2*Math.PI*46}`}
+                      strokeDashoffset={`${2*Math.PI*46*(1-ats_score.total_score/100)}`}
+                      transform="rotate(-90 55 55)"
+                    />
+                    <text x="55" y="50" textAnchor="middle" style={{fontFamily:'var(--fd)',fontSize:26,fontWeight:800,fill:ats_score.total_score>=70?'#34d399':ats_score.total_score>=50?'#fbbf24':'#f87171'}}>{ats_score.total_score}</text>
+                    <text x="55" y="66" textAnchor="middle" style={{fontFamily:'var(--fm)',fontSize:10,fill:'var(--text3)'}}>/ 100</text>
+                  </svg>
+                </div>
+                <div style={{fontFamily:'var(--fd)',fontSize:28,fontWeight:800,color:ats_score.grade==='A'?'#34d399':ats_score.grade==='B'?'#a78bfa':ats_score.grade==='C'?'#fbbf24':'#f87171',marginTop:4}}>Grade {ats_score.grade}</div>
+                <div style={{fontFamily:'var(--fm)',fontSize:10,color:'var(--text3)',letterSpacing:.8,textTransform:'uppercase',marginTop:4}}>ATS Pass Probability</div>
+              </div>
+              <div style={{flex:1}}>
+                <div style={{...sectionTitle,marginBottom:14}}>📊 Score Breakdown</div>
+                {Object.values(ats_score.breakdown||{}).map((dim,i) => (
+                  <div key={i} style={{display:'flex',alignItems:'center',gap:10,marginBottom:10}}>
+                    <div style={{width:160,fontSize:12,color:'var(--text2)'}}>{dim.label}</div>
+                    <div style={{flex:1,height:6,background:'var(--bg2)',borderRadius:3,overflow:'hidden'}}>
+                      <div style={{height:'100%',width:`${(dim.score/dim.max)*100}%`,
+                        background:dim.score/dim.max>=.7?'#34d399':dim.score/dim.max>=.4?'#fbbf24':'#f87171',
+                        borderRadius:3,transition:'width .5s ease'}}/>
+                    </div>
+                    <div style={{fontFamily:'var(--fm)',fontSize:11,color:'var(--text2)',width:50,textAlign:'right'}}>{dim.score}/{dim.max}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:18,marginBottom:18}}>
+              {/* Keywords */}
+              <div style={card}>
+                <div style={sectionTitle}>🔑 Keyword Match — {ats_score.keyword_hit_rate}%</div>
+                {(ats_score.missing_critical||[]).length>0 && (
+                  <div style={{marginBottom:14}}>
+                    <div style={{fontFamily:'var(--fm)',fontSize:10,color:'#f87171',letterSpacing:.6,textTransform:'uppercase',marginBottom:7}}>❌ Critical Missing</div>
+                    <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+                      {ats_score.missing_critical.map((k,i)=>(
+                        <span key={i} style={{background:'rgba(248,113,113,.08)',border:'1px solid rgba(248,113,113,.2)',
+                          color:'#f87171',borderRadius:6,padding:'3px 10px',fontSize:11,fontFamily:'var(--fm)'}}>{k}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {(ats_score.matched_keywords||[]).length>0 && (
+                  <div>
+                    <div style={{fontFamily:'var(--fm)',fontSize:10,color:'#34d399',letterSpacing:.6,textTransform:'uppercase',marginBottom:7}}>✅ Matched</div>
+                    <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+                      {ats_score.matched_keywords.slice(0,10).map((k,i)=>(
+                        <span key={i} style={{background:'rgba(52,211,153,.07)',border:'1px solid rgba(52,211,153,.18)',
+                          color:'#34d399',borderRadius:6,padding:'3px 10px',fontSize:11,fontFamily:'var(--fm)'}}>{k}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Sections detected */}
+              <div style={card}>
+                <div style={sectionTitle}>🗂 Resume Sections Detected</div>
+                {Object.entries(ats_score.sections_detected||{}).map(([sec,found],i)=>(
+                  <div key={i} style={{display:'flex',alignItems:'center',gap:10,marginBottom:9,paddingBottom:9,borderBottom:'1px solid var(--border)'}}>
+                    <span style={{fontSize:15}}>{found?'✅':'❌'}</span>
+                    <span style={{fontSize:13,fontWeight:500,textTransform:'capitalize',flex:1}}>{sec}</span>
+                    <span style={{fontFamily:'var(--fm)',fontSize:10,color:found?'#34d399':'#f87171'}}>{found?'Found':'Missing'}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ATS Tips */}
+            {(ats_score.tips||[]).length>0 && (
+              <div style={card}>
+                <div style={sectionTitle}>💡 How to Improve Your ATS Score</div>
+                {ats_score.tips.map((tip,i)=>(
+                  <div key={i} style={{display:'flex',gap:12,marginBottom:12,padding:'12px 14px',
+                    background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:10}}>
+                    <span style={{color:'var(--accent)',fontWeight:700,flexShrink:0}}>{i+1}.</span>
+                    <span style={{fontSize:13,color:'var(--text2)',lineHeight:1.6}}>{tip}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ════ TAB: RESUME TIPS ════ */}
+        {tab==='resume-tips' && resume_suggestions && (
+          <div className="fade-up">
+            <div style={{...card,marginBottom:18,display:'flex',gap:20,alignItems:'center',flexWrap:'wrap'}}>
+              <div>
+                <div style={{fontFamily:'var(--fd)',fontSize:26,fontWeight:800,letterSpacing:-1}}>{resume_suggestions.total_suggestions}</div>
+                <div style={{fontFamily:'var(--fm)',fontSize:10,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8}}>Total Suggestions</div>
+              </div>
+              <div style={{width:1,height:40,background:'var(--border)'}}/>
+              <div>
+                <div style={{fontFamily:'var(--fd)',fontSize:26,fontWeight:800,letterSpacing:-1,color:'#f87171'}}>{resume_suggestions.high_priority}</div>
+                <div style={{fontFamily:'var(--fm)',fontSize:10,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8}}>High Priority</div>
+              </div>
+              <div style={{flex:1,fontSize:13,color:'var(--text2)',lineHeight:1.65,maxWidth:480}}>
+                These suggestions are based on your resume vs the JD. Address high-priority items first — they have the biggest impact on recruiter and ATS screening.
+              </div>
+            </div>
+
+            <div style={{display:'flex',flexDirection:'column',gap:12}}>
+              {(resume_suggestions.suggestions||[]).map((s,i)=>(
+                <div key={i} style={{
+                  background:'var(--surface)',border:`1px solid ${s.priority==='high'?'rgba(248,113,113,.25)':s.priority==='medium'?'rgba(251,191,36,.2)':'var(--border)'}`,
+                  borderLeft:`3px solid ${s.priority==='high'?'#f87171':s.priority==='medium'?'#fbbf24':'#34d399'}`,
+                  borderRadius:12,padding:18,
+                }}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8,gap:12}}>
+                    <div style={{display:'flex',gap:10,alignItems:'center'}}>
+                      <span style={{fontSize:20}}>{s.icon}</span>
+                      <div>
+                        <div style={{fontWeight:600,fontSize:14,letterSpacing:'-.2px'}}>{s.title}</div>
+                        <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8,marginTop:2}}>{s.category}</div>
+                      </div>
+                    </div>
+                    <span style={{
+                      fontFamily:'var(--fm)',fontSize:9,padding:'3px 10px',borderRadius:100,letterSpacing:.6,flexShrink:0,
+                      color:s.priority==='high'?'#f87171':s.priority==='medium'?'#fbbf24':'#34d399',
+                      background:s.priority==='high'?'rgba(248,113,113,.08)':s.priority==='medium'?'rgba(251,191,36,.08)':'rgba(52,211,153,.08)',
+                      border:`1px solid ${s.priority==='high'?'rgba(248,113,113,.2)':s.priority==='medium'?'rgba(251,191,36,.2)':'rgba(52,211,153,.2)'}`,
+                    }}>{s.priority.toUpperCase()}</span>
+                  </div>
+                  <p style={{fontSize:13,color:'var(--text2)',lineHeight:1.65,marginBottom:10}}>{s.detail}</p>
+                  <div style={{background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:8,padding:'10px 14px',
+                    fontSize:13,color:'var(--accent)',lineHeight:1.6}}>
+                    <span style={{fontWeight:600}}>Action: </span>{s.action}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ════ TAB: WEEKLY ROADMAP ════ */}
+        {tab==='roadmap' && weekly_roadmap && (
+          <div className="fade-up">
+            {/* Summary */}
+            <div style={{...card,marginBottom:18}}>
+              <div style={sectionTitle}>📆 Your Week-by-Week Learning Calendar</div>
+              <div style={{display:'flex',gap:24,flexWrap:'wrap',marginBottom:8}}>
+                {[
+                  {v:weekly_roadmap.total_weeks,l:'Total Weeks'},
+                  {v:`${weekly_roadmap.total_hours}h`,l:'Total Hours'},
+                  {v:`${weekly_roadmap.daily_target_hours}h/day`,l:'Daily Target'},
+                  {v:(weekly_roadmap.milestones||[]).length,l:'Milestones'},
+                ].map((s,i)=>(
+                  <div key={i} style={{textAlign:'center'}}>
+                    <div style={{fontFamily:'var(--fd)',fontSize:22,fontWeight:800,letterSpacing:-1}}>{s.v}</div>
+                    <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8,marginTop:2}}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Week cards */}
+            <div style={{display:'flex',flexDirection:'column',gap:12}}>
+              {(weekly_roadmap.weeks||[]).map((week,i)=>{
+                const COLS=['#f59e0b','#2dd4bf','#f87171','#a78bfa'];
+                const col=COLS[(week.phase-1)%4];
+                const isMilestone=(weekly_roadmap.milestones||[]).some(m=>m.week===week.week);
+                return (
+                  <div key={i}>
+                    <div style={{
+                      background:'var(--surface)',border:`1px solid ${col}22`,
+                      borderLeft:`3px solid ${col}`,borderRadius:12,padding:18,
+                    }}>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12,gap:12,flexWrap:'wrap'}}>
+                        <div style={{display:'flex',alignItems:'center',gap:12}}>
+                          <div style={{width:36,height:36,borderRadius:8,background:`${col}18`,border:`1.5px solid ${col}`,
+                            display:'flex',alignItems:'center',justifyContent:'center',
+                            fontFamily:'var(--fd)',fontSize:14,fontWeight:800,color:col,flexShrink:0}}>
+                            W{week.week}
+                          </div>
+                          <div>
+                            <div style={{fontWeight:600,fontSize:14}}>
+                              {week.focus.length>0 ? week.focus.join(' · ') : week.phase_name}
+                            </div>
+                            <div style={{fontFamily:'var(--fm)',fontSize:10,color:'var(--text3)',marginTop:2}}>
+                              Phase {week.phase} · {week.estimated_hours}h · {week.daily_hours}h/day
+                            </div>
+                          </div>
+                        </div>
+                        <span style={{fontFamily:'var(--fm)',fontSize:9,padding:'3px 10px',borderRadius:100,
+                          color:col,background:`${col}12`,border:`1px solid ${col}30`}}>
+                          {week.phase_name}
+                        </span>
+                      </div>
+
+                      {/* Modules */}
+                      {week.modules.length>0 && (
+                        <div style={{display:'flex',flexWrap:'wrap',gap:7,marginBottom:12}}>
+                          {week.modules.map((mod,j)=>(
+                            <a key={j} href={mod.url||'#'} target="_blank" rel="noreferrer" style={{
+                              background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:8,
+                              padding:'7px 12px',fontSize:12,display:'flex',alignItems:'center',gap:6,
+                            }}>
+                              <span style={{color:mod.free?'#34d399':'#fbbf24'}}>{mod.free?'🆓':'💳'}</span>
+                              <span style={{fontWeight:500}}>{mod.skill}</span>
+                              <span style={{color:'var(--text3)',fontFamily:'var(--fm)',fontSize:10}}>{mod.hours}h</span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Tasks */}
+                      <div>
+                        {week.tasks.map((task,j)=>(
+                          <div key={j} style={{display:'flex',gap:7,fontSize:12,color:'var(--text2)',marginBottom:4,lineHeight:1.5}}>
+                            <span style={{color:col,flexShrink:0}}>›</span>{task}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Milestone banner */}
+                    {isMilestone && (()=>{
+                      const m=(weekly_roadmap.milestones||[]).find(x=>x.week===week.week);
+                      return m ? (
+                        <div style={{background:'rgba(245,158,11,.06)',border:'1px solid rgba(245,158,11,.2)',
+                          borderRadius:10,padding:'12px 18px',marginTop:8,
+                          display:'flex',gap:10,alignItems:'flex-start'}}>
+                          <span style={{fontSize:18,flexShrink:0}}>🏁</span>
+                          <div>
+                            <div style={{fontWeight:600,fontSize:13,color:'var(--accent)'}}>{m.title}</div>
+                            <div style={{fontSize:12,color:'var(--text3)',marginTop:3,lineHeight:1.5}}>{m.checkpoint}</div>
+                          </div>
+                        </div>
+                      ) : null;
+                    })()}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ════ TAB: JOB RECOMMENDATIONS ════ */}
+        {tab==='jobs' && job_recommendations && (
+          <div className="fade-up">
+            {/* Summary */}
+            <div style={{...card,marginBottom:18,display:'flex',gap:24,alignItems:'center',flexWrap:'wrap'}}>
+              <div style={{textAlign:'center'}}>
+                <div style={{fontFamily:'var(--fd)',fontSize:28,fontWeight:800,color:'#34d399'}}>{job_recommendations.ready_now}</div>
+                <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8,marginTop:2}}>Ready Now</div>
+              </div>
+              <div style={{width:1,height:40,background:'var(--border)'}}/>
+              <div style={{textAlign:'center'}}>
+                <div style={{fontFamily:'var(--fd)',fontSize:28,fontWeight:800,color:'#fbbf24'}}>{job_recommendations.almost_ready}</div>
+                <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8,marginTop:2}}>Almost Ready</div>
+              </div>
+              <div style={{width:1,height:40,background:'var(--border)'}}/>
+              <div style={{flex:1,fontSize:13,color:'var(--text2)',lineHeight:1.65,maxWidth:460}}>
+                Matched your skills against {job_recommendations.total_roles_analysed} role profiles. Roles where you meet 70%+ of requirements are marked as ready.
+              </div>
+            </div>
+
+            {/* Role cards */}
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(290px,1fr))',gap:14}}>
+              {(job_recommendations.recommendations||[]).map((job,i)=>(
+                <div key={i} style={{
+                  background:'var(--surface)',borderRadius:14,padding:18,
+                  border:`1.5px solid ${job.ready?'rgba(52,211,153,.25)':job.almost_ready?'rgba(251,191,36,.2)':'var(--border)'}`,
+                  position:'relative',overflow:'hidden',
+                }}>
+                  {/* Fit bar background */}
+                  <div style={{position:'absolute',inset:0,background:`linear-gradient(90deg, ${
+                    job.ready?'rgba(52,211,153,.04)':job.almost_ready?'rgba(251,191,36,.03)':'transparent'
+                  } ${job.fit_percent}%, transparent ${job.fit_percent}%)`,pointerEvents:'none'}}/>
+
+                  {/* Header */}
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8,gap:8}}>
+                    <div>
+                      <div style={{fontWeight:700,fontSize:14,letterSpacing:'-.2px'}}>{job.role}</div>
+                      <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.8,marginTop:2}}>{job.category}</div>
+                    </div>
+                    <div style={{textAlign:'center',flexShrink:0}}>
+                      <div style={{fontFamily:'var(--fd)',fontSize:22,fontWeight:800,letterSpacing:-1,
+                        color:job.ready?'#34d399':job.almost_ready?'#fbbf24':'var(--text2)'}}>{job.fit_percent}%</div>
+                      <div style={{fontFamily:'var(--fm)',fontSize:8,color:'var(--text3)',textTransform:'uppercase',letterSpacing:.5}}>Fit</div>
+                    </div>
+                  </div>
+
+                  {/* Fit bar */}
+                  <div style={{height:4,background:'var(--bg2)',borderRadius:2,overflow:'hidden',marginBottom:10}}>
+                    <div style={{height:'100%',borderRadius:2,transition:'width .5s ease',
+                      width:`${job.fit_percent}%`,
+                      background:job.ready?'#34d399':job.almost_ready?'#fbbf24':'#f87171'}}/>
+                  </div>
+
+                  <p style={{fontSize:12,color:'var(--text3)',marginBottom:10,lineHeight:1.55}}>{job.description}</p>
+
+                  {/* Salary */}
+                  <div style={{fontFamily:'var(--fm)',fontSize:11,color:'var(--accent)',marginBottom:10}}>
+                    💰 {job.salary_range}
+                  </div>
+
+                  {/* Status */}
+                  {job.ready ? (
+                    <div style={{background:'rgba(52,211,153,.08)',border:'1px solid rgba(52,211,153,.2)',
+                      borderRadius:8,padding:'6px 10px',fontSize:12,color:'#34d399',marginBottom:10}}>
+                      ✅ You're qualified — apply now
+                    </div>
+                  ) : job.almost_ready ? (
+                    <div style={{background:'rgba(251,191,36,.07)',border:'1px solid rgba(251,191,36,.2)',
+                      borderRadius:8,padding:'6px 10px',fontSize:12,color:'#fbbf24',marginBottom:10}}>
+                      🟡 Close — {job.skills_to_learn.slice(0,2).join(', ')} would close the gap
+                    </div>
+                  ) : (
+                    <div style={{background:'var(--bg2)',border:'1px solid var(--border)',
+                      borderRadius:8,padding:'6px 10px',fontSize:12,color:'var(--text3)',marginBottom:10}}>
+                      📚 Needs work — focus on your pathway first
+                    </div>
+                  )}
+
+                  {/* Matched */}
+                  {job.matched_skills.length>0 && (
+                    <div style={{display:'flex',flexWrap:'wrap',gap:5,marginBottom:12}}>
+                      {job.matched_skills.slice(0,4).map((sk,j)=>(
+                        <span key={j} style={{fontFamily:'var(--fm)',fontSize:9,padding:'2px 7px',borderRadius:4,
+                          background:'rgba(52,211,153,.07)',color:'#34d399',border:'1px solid rgba(52,211,153,.15)'}}>{sk}</span>
+                      ))}
+                      {job.matched_skills.length>4 && (
+                        <span style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)'}}>+{job.matched_skills.length-4} more</span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Apply buttons */}
+                  {(job.apply_links||[]).length>0 && (
+                    <div style={{borderTop:'1px solid var(--border)',paddingTop:12,marginTop:4}}>
+                      <div style={{fontFamily:'var(--fm)',fontSize:9,color:'var(--text3)',letterSpacing:.8,textTransform:'uppercase',marginBottom:8}}>
+                        Apply On
+                      </div>
+                      <div style={{display:'flex',gap:7,flexWrap:'wrap'}}>
+                        {job.apply_links.map((link,j)=>{
+                          const platformStyle = {
+                            LinkedIn: {bg:'#0A66C2', icon:'in'},
+                            Naukri:   {bg:'#FF7555', icon:'N'},
+                            Indeed:   {bg:'#003A9B', icon:'id'},
+                          }[link.platform] || {bg:'var(--accent)',icon:'↗'};
+                          return (
+                            <a key={j} href={link.url} target="_blank" rel="noreferrer"
+                              style={{
+                                display:'inline-flex', alignItems:'center', gap:6,
+                                padding:'6px 12px', borderRadius:8, fontSize:12, fontWeight:600,
+                                background: platformStyle.bg, color:'#fff',
+                                textDecoration:'none', transition:'opacity .15s',
+                              }}
+                              onMouseEnter={e=>e.currentTarget.style.opacity='.82'}
+                              onMouseLeave={e=>e.currentTarget.style.opacity='1'}
+                            >
+                              <span style={{fontFamily:'var(--fm)',fontSize:10,fontWeight:800,
+                                background:'rgba(255,255,255,.2)',borderRadius:4,padding:'1px 5px'}}>
+                                {platformStyle.icon}
+                              </span>
+                              {link.platform}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
 
       </div>
     </div>

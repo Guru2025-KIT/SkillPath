@@ -1,14 +1,15 @@
 """
 SkillPath AI-Adaptive Onboarding Engine
-Backend API — FastAPI
+Backend API v2.0  |  FastAPI + spaCy + NetworkX + Claude AI
 """
 
 import logging
 import os
+import json as _json
+
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import anthropic
 
 from services.parser import extract_text
 from services.extractor import (
@@ -20,13 +21,19 @@ from services.extractor import (
     extract_target_role,
 )
 from services.pathway import build_learning_pathway
+from services.extras import (
+    compute_ats_score,
+    generate_resume_suggestions,
+    build_weekly_roadmap,
+    recommend_jobs,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="SkillPath API",
-    description="AI-Adaptive Onboarding Engine — skill gap analysis and personalized learning pathways.",
+    description="AI-Adaptive Onboarding Engine — skill gap analysis & personalized learning pathways.",
     version="2.0.0",
 )
 
@@ -39,36 +46,53 @@ app.add_middleware(
 )
 
 
+# ── Core pipeline ──────────────────────────────────────────────────────────────
+
 def run_analysis(resume_text: str, jd_text: str) -> dict:
-    candidate_name = extract_candidate_name(resume_text)
-    target_role = extract_target_role(jd_text)
+    """Full pipeline — called by /analyze and /analyze-text."""
+
+    candidate_name  = extract_candidate_name(resume_text)
+    target_role     = extract_target_role(jd_text)
     logger.info(f"Candidate: {candidate_name} | Role: {target_role}")
 
-    resume_skills = extract_skills_from_text(resume_text)
-    logger.info(f"Resume skills found: {len(resume_skills)}")
-
+    resume_skills   = extract_skills_from_text(resume_text)
     required_skills = extract_required_skills(jd_text)
-    logger.info(f"JD required skills: {len(required_skills)}")
+    logger.info(f"Resume skills: {len(resume_skills)} | JD skills: {len(required_skills)}")
 
-    gaps, strengths = compute_skill_gaps(resume_skills, required_skills)
-    logger.info(f"Gaps: {len(gaps)} | Strengths: {len(strengths)}")
+    gaps, strengths  = compute_skill_gaps(resume_skills, required_skills)
+    pathway_result   = build_learning_pathway(gaps, resume_skills)
+    readiness        = compute_readiness_score(gaps, len(required_skills))
+    logger.info(f"Gaps: {len(gaps)} | Strengths: {len(strengths)} | Readiness: {readiness}%")
 
-    pathway_result = build_learning_pathway(gaps, resume_skills)
-    readiness = compute_readiness_score(gaps, len(required_skills))
+    # ── Extra features — computed inline so front-end gets everything in one call ──
+    ats_result      = compute_ats_score(resume_text, resume_skills, required_skills, gaps)
+    suggestions     = generate_resume_suggestions(
+                          resume_text, resume_skills, required_skills,
+                          gaps, candidate_name, target_role)
+    weekly_roadmap  = build_weekly_roadmap(pathway_result["learning_pathway"])
+    job_recs        = recommend_jobs(resume_skills, gaps)
 
     return {
-        "candidate_name": candidate_name,
-        "target_role": target_role,
-        "resume_skills": resume_skills,
-        "required_skills": required_skills,
-        "skill_gaps": gaps,
-        "strengths": strengths,
-        "learning_pathway": pathway_result["learning_pathway"],
+        # ── Core results ──────────────────────────────────────────────────────
+        "candidate_name":          candidate_name,
+        "target_role":             target_role,
+        "resume_skills":           resume_skills,
+        "required_skills":         required_skills,
+        "skill_gaps":              gaps,
+        "strengths":               strengths,
+        "learning_pathway":        pathway_result["learning_pathway"],
         "overall_readiness_score": readiness,
-        "estimated_total_weeks": pathway_result["estimated_total_weeks"],
-        "reasoning_trace": pathway_result["reasoning_trace"],
+        "estimated_total_weeks":   pathway_result["estimated_total_weeks"],
+        "reasoning_trace":         pathway_result["reasoning_trace"],
+        # ── Extra features ────────────────────────────────────────────────────
+        "ats_score":               ats_result,
+        "resume_suggestions":      suggestions,
+        "weekly_roadmap":          weekly_roadmap,
+        "job_recommendations":     job_recs,
     }
 
+
+# ── Endpoints ──────────────────────────────────────────────────────────────────
 
 @app.get("/health")
 def health():
@@ -80,69 +104,68 @@ async def analyze(
     resume: UploadFile = File(...),
     job_description: UploadFile = File(...),
 ):
-    logger.info(f"Analyze request: resume={resume.filename}, jd={job_description.filename}")
+    """Accept uploaded resume + JD files, return full analysis including all extra features."""
+    logger.info(f"Analyze: resume={resume.filename}, jd={job_description.filename}")
 
-    resume_bytes = await resume.read()
-    jd_bytes = await job_description.read()
-
-    resume_text = extract_text(resume_bytes, resume.filename)
-    jd_text = extract_text(jd_bytes, job_description.filename)
+    resume_text = extract_text(await resume.read(), resume.filename)
+    jd_text     = extract_text(await job_description.read(), job_description.filename)
 
     if len(resume_text) < 50:
-        raise HTTPException(status_code=400, detail="Resume text is too short. Please upload a valid resume.")
+        raise HTTPException(400, "Resume text too short — please upload a valid resume.")
     if len(jd_text) < 50:
-        raise HTTPException(status_code=400, detail="Job description text is too short. Please upload a valid JD.")
+        raise HTTPException(400, "Job description too short — please upload a valid JD.")
 
     try:
-        result = run_analysis(resume_text, jd_text)
-        return JSONResponse(content=result)
+        return JSONResponse(content=run_analysis(resume_text, jd_text))
     except Exception as e:
         logger.exception("Analysis failed")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(500, str(e))
 
 
 @app.post("/analyze-text")
 async def analyze_text(
     resume_text: str = Form(...),
-    jd_text: str = Form(...),
+    jd_text:     str = Form(...),
 ):
+    """Accept raw text — useful for testing via Swagger UI."""
     if not resume_text.strip():
-        raise HTTPException(status_code=400, detail="Resume text is empty.")
+        raise HTTPException(400, "Resume text is empty.")
     if not jd_text.strip():
-        raise HTTPException(status_code=400, detail="JD text is empty.")
+        raise HTTPException(400, "JD text is empty.")
     try:
-        result = run_analysis(resume_text, jd_text)
-        return JSONResponse(content=result)
+        return JSONResponse(content=run_analysis(resume_text, jd_text))
     except Exception as e:
         logger.exception("Analysis failed")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(500, str(e))
 
 
 @app.post("/interview-prep")
 async def interview_prep(
-    candidate_name: str = Form(...),
-    target_role: str = Form(...),
-    skill_gaps: str = Form(...),   # JSON string
-    strengths: str = Form(...),    # JSON string
+    candidate_name:  str = Form(...),
+    target_role:     str = Form(...),
+    skill_gaps:      str = Form(...),
+    strengths:       str = Form(...),
     readiness_score: int = Form(...),
 ):
     """
-    Use Claude to generate a personalized interview prep guide:
-    - Behavioral questions based on strengths
-    - Technical questions targeting gap areas
-    - Red-flag questions the candidate should prepare for
-    - Coaching tips
+    Generate a personalised interview prep guide using Claude AI.
+    Falls back to rule-based guide if ANTHROPIC_API_KEY is not set.
     """
-    import json as _json
-
-    gaps_list = _json.loads(skill_gaps)
+    gaps_list      = _json.loads(skill_gaps)
     strengths_list = _json.loads(strengths)
 
-    critical_gaps = [g["skill"] for g in gaps_list if g.get("importance") == "critical"][:6]
+    critical_gaps  = [g["skill"] for g in gaps_list if g.get("importance") == "critical"][:6]
     important_gaps = [g["skill"] for g in gaps_list if g.get("importance") == "important"][:4]
-    top_strengths = strengths_list[:6]
+    top_strengths  = strengths_list[:6]
 
-    prompt = f"""You are an expert technical interview coach preparing a candidate for a job interview.
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+
+    if not api_key:
+        return JSONResponse(content=_fallback_interview_prep(
+            target_role, critical_gaps, top_strengths
+        ))
+
+    prompt = f"""You are an expert technical interview coach preparing a candidate for a real interview.
 
 Candidate: {candidate_name}
 Target Role: {target_role}
@@ -151,83 +174,95 @@ Critical Skill Gaps: {', '.join(critical_gaps) if critical_gaps else 'None'}
 Important Skill Gaps: {', '.join(important_gaps) if important_gaps else 'None'}
 Key Strengths: {', '.join(top_strengths) if top_strengths else 'None'}
 
-Generate a comprehensive interview preparation guide. Return ONLY valid JSON with this exact structure:
+Return ONLY valid JSON (no markdown, no backticks) with this exact structure:
 {{
-  "coaching_summary": "2-3 sentence personalized coaching overview for this specific candidate and role",
+  "coaching_summary": "2-3 sentence personalised coaching overview",
   "technical_questions": [
-    {{"question": "...", "skill": "...", "difficulty": "easy|medium|hard", "tip": "how to answer this well in 1 sentence"}}
+    {{"question": "...", "skill": "...", "difficulty": "easy|medium|hard", "tip": "one-sentence tip"}}
   ],
   "behavioral_questions": [
-    {{"question": "...", "framework": "STAR|CAR|PAR", "angle": "what they're testing"}}
+    {{"question": "...", "framework": "STAR|CAR|PAR", "angle": "what the interviewer is testing"}}
   ],
   "gap_questions": [
-    {{"question": "...", "skill": "...", "how_to_handle": "honest strategy to answer this gap question"}}
+    {{"question": "...", "skill": "...", "how_to_handle": "specific honest strategy"}}
   ],
-  "quick_wins": [
-    "specific actionable tip the candidate can implement before the interview"
-  ]
+  "quick_wins": ["actionable tip the candidate can do before the interview"]
 }}
 
-Requirements:
-- 5 technical questions targeting the gap skills
-- 4 behavioral questions leveraging the strengths  
-- 3 gap questions (questions about weak areas with honest coaching on how to address them)
-- 4 quick win tips
-- Be specific to the role and skills, not generic"""
+Rules: 5 technical Qs, 4 behavioral Qs, 3 gap Qs, 4 quick wins. Be specific, never generic."""
 
     try:
-        api_key = os.environ.get("ANTHROPIC_API_KEY", "")
-        if not api_key:
-            # Return mock data if no API key configured
-            return JSONResponse(content=_get_mock_interview_prep(target_role, critical_gaps, top_strengths))
-
-        client = anthropic.Anthropic(api_key=api_key)
+        import anthropic
+        client  = anthropic.Anthropic(api_key=api_key)
         message = client.messages.create(
             model="claude-opus-4-6",
             max_tokens=2000,
             messages=[{"role": "user", "content": prompt}]
         )
         raw = message.content[0].text.strip()
-        # Strip markdown fences if present
         if raw.startswith("```"):
             raw = raw.split("```")[1]
             if raw.startswith("json"):
                 raw = raw[4:]
-        result = _json.loads(raw.strip())
-        return JSONResponse(content=result)
+        return JSONResponse(content=_json.loads(raw.strip()))
     except Exception as e:
-        logger.exception("Interview prep generation failed")
-        return JSONResponse(content=_get_mock_interview_prep(target_role, critical_gaps, top_strengths))
+        logger.exception("Claude interview prep failed — using fallback")
+        return JSONResponse(content=_fallback_interview_prep(
+            target_role, critical_gaps, top_strengths
+        ))
 
 
-def _get_mock_interview_prep(role, gaps, strengths):
-    """Fallback when no API key is set."""
-    gap_str = gaps[0] if gaps else "core technical skills"
-    strength_str = strengths[0] if strengths else "your existing skills"
+def _fallback_interview_prep(role: str, gaps: list, strengths: list) -> dict:
+    gap      = gaps[0]      if gaps      else "core technical skills"
+    strength = strengths[0] if strengths else "your existing experience"
     return {
-        "coaching_summary": f"You're applying for {role}. Focus your prep on demonstrating {strength_str} while being honest about your {gap_str} growth journey. Interviewers value self-awareness and a clear plan over pretending gaps don't exist.",
+        "coaching_summary": (
+            f"You're targeting {role}. Lead with {strength} in every answer. "
+            f"When {gap} comes up, be upfront about where you are and show your learning plan. "
+            f"Interviewers hire people who know themselves."
+        ),
         "technical_questions": [
-            {"question": f"Walk me through how you'd architect a solution using {gap_str}.", "skill": gap_str, "difficulty": "medium", "tip": "Focus on your thought process and what you'd research first."},
-            {"question": "Describe the most complex technical problem you've solved recently.", "skill": "problem solving", "difficulty": "medium", "tip": "Use STAR format, emphasize the impact."},
-            {"question": "How do you stay current with new technologies in your field?", "skill": "learning agility", "difficulty": "easy", "tip": "Mention specific resources: blogs, courses, side projects."},
-            {"question": f"What's the difference between {gap_str} and similar technologies you know?", "skill": gap_str, "difficulty": "hard", "tip": "Honest comparison shows depth of understanding."},
-            {"question": "Tell me about a time you had to learn something quickly under pressure.", "skill": "adaptability", "difficulty": "medium", "tip": "Pick an example where the outcome was positive."},
+            {"question": f"Walk me through how you'd approach a problem requiring {gap}.",
+             "skill": gap, "difficulty": "medium",
+             "tip": "Focus on your thinking process, not just the answer."},
+            {"question": "Describe the most technically complex thing you've shipped.",
+             "skill": "engineering depth", "difficulty": "medium",
+             "tip": "Specifics beat vague stories every time."},
+            {"question": f"What's the difference between {gap} and something you know well?",
+             "skill": gap, "difficulty": "hard",
+             "tip": "Honest comparison shows intellectual integrity."},
+            {"question": "How do you debug a production issue you've never seen before?",
+             "skill": "problem solving", "difficulty": "medium",
+             "tip": "Walk through your systematic process step by step."},
+            {"question": "Tell me about a technical decision you'd make differently today.",
+             "skill": "reflection", "difficulty": "easy",
+             "tip": "Shows growth mindset — pick something real."},
         ],
         "behavioral_questions": [
-            {"question": "Tell me about a project you're most proud of.", "framework": "STAR", "angle": "Technical depth and ownership"},
-            {"question": "Describe a conflict with a teammate and how you resolved it.", "framework": "CAR", "angle": "Collaboration and communication"},
-            {"question": f"Give an example of how you used {strength_str} to deliver value.", "framework": "STAR", "angle": "Skill demonstration with business impact"},
-            {"question": "Tell me about a time you failed and what you learned.", "framework": "PAR", "angle": "Self-awareness and growth mindset"},
+            {"question": "Tell me about a project you're genuinely proud of.",
+             "framework": "STAR", "angle": "Ownership and technical depth"},
+            {"question": f"Give me an example of how you used {strength} to deliver measurable value.",
+             "framework": "STAR", "angle": "Skill with business impact"},
+            {"question": "Describe a time you disagreed with your team and what happened.",
+             "framework": "CAR", "angle": "Collaboration and communication"},
+            {"question": "Tell me about a time you had to learn something under pressure.",
+             "framework": "PAR", "angle": "Adaptability and learning velocity"},
         ],
         "gap_questions": [
-            {"question": f"We require strong {gap_str} experience. How much have you used it?", "skill": gap_str, "how_to_handle": "Be honest about your current level, show your learning plan, and highlight transferable skills."},
-            {"question": "What areas do you feel you still need to grow in for this role?", "skill": "self-awareness", "how_to_handle": "Name the gap confidently, then immediately pivot to your concrete plan to close it."},
-            {"question": "Why should we hire you over someone with more experience in these areas?", "skill": "value proposition", "how_to_handle": "Lead with your strengths and learning velocity — fresh perspectives often outperform stale experience."},
+            {"question": f"We need strong {gap} skills from day one. How much hands-on experience do you have?",
+             "skill": gap,
+             "how_to_handle": "Be honest about your level. Name it clearly, then show your specific learning plan."},
+            {"question": "What's the biggest gap between where you are now and what this role needs?",
+             "skill": "self-awareness",
+             "how_to_handle": "Name the gap before they do. Then pivot to your concrete plan to close it in 30-60 days."},
+            {"question": "Why should we pick you over someone who already has all these skills?",
+             "skill": "value proposition",
+             "how_to_handle": f"Lead with {strength}, learning speed, and fresh perspective."},
         ],
         "quick_wins": [
-            f"Build a small project using {gap_str} this week — even a TODO app shows initiative",
-            "Prepare a 2-minute 'about me' story that connects your background directly to this role",
-            f"Read the official {gap_str} documentation introduction so you can speak to it confidently",
-            "Research the company's tech stack and prepare 3 thoughtful questions about their engineering challenges",
+            f"Build one small project using {gap} this week — a demo shows initiative",
+            f"Prepare a crisp 90-second 'about me' connecting your {strength} to this role",
+            "Research the company's engineering blog and prepare two thoughtful questions",
+            f"Read the official {gap} docs intro so you can speak to it without hesitation",
         ]
     }
