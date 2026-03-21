@@ -1,6 +1,4 @@
 """
-extras.py — Four judge-impressing features:
-
 1. ATS Score Simulation   — keyword density + section detection + formatting signals
 2. Resume Suggestions     — actionable fixes based on gaps and missing keywords
 3. Personalized Roadmap   — week-by-week calendar from existing pathway phases
